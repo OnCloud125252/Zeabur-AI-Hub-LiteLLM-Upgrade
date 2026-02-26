@@ -20,6 +20,11 @@ Research and plan the LiteLLM upgrade from v1.79.0-stable → v1.81.12-stable to
 - **Resource**: https://github.com/BerriAI/litellm/releases
 - **Writing Guide**: See [docs/docs-writing-guide.md](docs/docs-writing-guide.md) for documentation patterns
 
+## Python Development
+
+- **Always use UV** for Python package management (see [docs/python-development-uv.md](docs/python-development-uv.md) for details)
+- Never use pip, pipenv, or poetry
+
 ## What to Do
 
 1. Read `specs/requirements.md` for full requirements
