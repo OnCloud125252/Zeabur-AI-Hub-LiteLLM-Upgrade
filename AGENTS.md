@@ -19,6 +19,44 @@ Research and plan the LiteLLM upgrade from v1.79.0-stable → v1.81.12-stable to
 - **Problem**: "function call read in the N. content block is missing a thought_signature"
 - **Resource**: https://github.com/BerriAI/litellm/releases
 
+## Document Creation
+
+When you find important information, create new documents in `docs/`:
+
+| Document Type | Location | When to Create |
+|---------------|----------|----------------|
+| Research notes | `docs/research/` | When investigating specific PRs, issues, or features |
+| Version analysis | Root or `docs/` | When analyzing version changes, breaking changes |
+| Findings/Reports | Root | When delivering conclusions or recommendations |
+
+### Document Naming
+
+- Use lowercase with hyphens: `pr-12345-analysis.md`
+- Use descriptive names: `upgrade-changelog-v1.80.md` not `notes.md`
+- Include date for reports: `upgrade-plan-2026-02.md`
+
+### Document Template
+
+```markdown
+# [Title]
+
+**Date**: YYYY-MM-DD
+**Purpose**: [What this document captures]
+
+## Summary
+
+[Brief overview]
+
+## Details
+
+[Content]
+
+## References
+
+- [Link 1]
+- [Link 2]
+```
+
 ## What to Do
 
 1. Read `docs/requirements.md` for full requirements
