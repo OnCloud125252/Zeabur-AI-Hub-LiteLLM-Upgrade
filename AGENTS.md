@@ -10,8 +10,8 @@ Research and plan the LiteLLM upgrade from v1.79.0-stable → v1.81.12-stable to
 
 | File | Purpose |
 |------|---------|
-| `docs/brief.md` | Full requirements and task breakdown |
-| `litellm-pr-compatibility.md` | Version compatibility matrix |
+| `docs/requirements.md` | Full requirements and task breakdown |
+| `specs/litellm-pr-compatibility.md` | Version compatibility matrix |
 
 ## Quick Reference
 
@@ -21,7 +21,7 @@ Research and plan the LiteLLM upgrade from v1.79.0-stable → v1.81.12-stable to
 
 ## What to Do
 
-1. Read `docs/brief.md` for full requirements
+1. Read `docs/requirements.md` for full requirements
 2. Check existing research in `docs/research/`
 3. Document findings in the project
 
