@@ -1,16 +1,16 @@
 # 版本差異分析：LiteLLM v1.79.0 → v1.81.12-stable.1
 
-> 11-version changelog analysis
+> 11 個版本更新日誌分析
 
-← [Back to Research](README.md)
+← [返回研究文件](README.md)
 
 ---
 
-- **Date**: 2026-02-27
-- **Status**: Complete
-- **Purpose**: 記錄 LiteLLM v1.79.0-stable 至 v1.81.12-stable.1 之間的所有變更，並評估對 Zeabur AI Hub 的影響。
+- **日期**：2026-02-27
+- **狀態**：已完成
+- **目的**：記錄 LiteLLM v1.79.0-stable 至 v1.81.12-stable.1 之間的所有變更，並評估對 Zeabur AI Hub 的影響。
 
-## Summary
+## 摘要
 
 本文件涵蓋 11 個穩定版本的完整變更分析，從 2025 年 10 月（v1.79.0）至 2026 年 2 月（v1.81.12-stable.1），時間跨度約 4 個月。
 
@@ -34,16 +34,16 @@
 
 | 類別 | 數量 | 說明 |
 |------|------|------|
-| 破壞性變更（Breaking Changes） | 7 | Docker 映像遷移、Python 版本、OpenAI SDK v2、依賴項 |
-| 新功能（New Features） | 50+ | A2A agents、Policy Engine、Access Groups、Skills API 等 |
-| 錯誤修復（Bug Fixes） | 100+ | 記憶體洩漏、tool calling、streaming、cost tracking 等 |
-| 效能改善（Performance） | 15+ | 21% 延遲降低、LRU 快取、provider config O(1) 查詢 |
-| 資料庫變更（DB Schema） | 15 張新表 + 多張修改表 | 詳見 `docs/db-schema-migration-v1.79-to-v1.81.md` |
-| 安全修復（Security） | 10+ | key 過期洩漏、SSRF 防護、CVE 修補 |
+| 破壞性變更 | 7 | Docker 映像遷移、Python 版本、OpenAI SDK v2、依賴項 |
+| 新功能 | 50+ | A2A agents、Policy Engine、Access Groups、Skills API 等 |
+| 錯誤修復 | 100+ | 記憶體洩漏、tool calling、streaming、cost tracking 等 |
+| 效能改善 | 15+ | 21% 延遲降低、LRU 快取、provider config O(1) 查詢 |
+| 資料庫變更 | 15 張新表 + 多張修改表 | 詳見 `docs/db-schema-migration-v1.79-to-v1.81.md` |
+| 安全修復 | 10+ | key 過期洩漏、SSRF 防護、CVE 修補 |
 
 ---
 
-## 1. 破壞性變更（Breaking Changes）
+## 1. 破壞性變更
 
 ### 1.1 Docker 映像倉庫遷移
 
@@ -392,7 +392,7 @@
 
 ---
 
-## References
+## 參考資料
 
 - LiteLLM Releases: <https://github.com/BerriAI/litellm/releases>
 - PR #16895（thought_signature 初始修復）: <https://github.com/BerriAI/litellm/pull/16895>

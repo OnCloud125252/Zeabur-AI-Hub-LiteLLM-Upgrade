@@ -1,81 +1,81 @@
-# Research
+# 研究文件
 
-> Investigation and analysis documents for the LiteLLM upgrade
+> LiteLLM 升級的研究與分析文件
 
-← [Back to Documentation Home](../README.md)
+← [返回文件首頁](../README.md)
 
 ---
 
-## Research Documents
+## 研究文件
 
-| Document | Description | Key Findings |
+| 文件 | 說明 | 主要發現 |
 |----------|-------------|--------------|
-| [Upgrade Changelog](upgrade-changelog-v1.79-to-v1.81.md) | 11-version changelog analysis (v1.79.0 → v1.81.12) | 7 breaking changes, 50+ new features, 100+ bug fixes |
-| [DB Schema Migration](db-schema-migration-v1.79-to-v1.81.md) | Database schema analysis with SQL scripts | 15 new tables, 12 modified tables, 95% additive |
-| [PR #16895](pr-16895.md) | Initial thought_signature fix | Stores signatures in tool call IDs |
-| [PR #18374](pr-18374.md) | Thought signature finalization | Pre-call hook, removed beta status |
-| [PR Compatibility](pr-compatibility.md) | Version compatibility matrix | v1.80.11+ required for both fixes |
+| [升級變更日誌](upgrade-changelog-v1.79-to-v1.81.md) | 11 個版本變更日誌分析（v1.79.0 → v1.81.12） | 7 項重大變更、50+ 新功能、100+ 錯誤修復 |
+| [資料庫結構遷移](db-schema-migration-v1.79-to-v1.81.md) | 資料庫結構分析與 SQL 腳本 | 15 個新資料表、12 個修改資料表、95% 為新增 |
+| [PR #16895](pr-16895.md) | 初始 thought_signature 修復 | 將簽名儲存在工具呼叫 ID 中 |
+| [PR #18374](pr-18374.md) | Thought signature 最終完成 | 前置呼叫鉤子、移除 beta 狀態 |
+| [PR 相容性](pr-compatibility.md) | 版本相容性矩陣 | 需要 v1.80.11+ 才能同時包含兩項修復 |
 
 ---
 
-## Document Summaries
+## 文件摘要
 
-### Upgrade Changelog
+### 升級變更日誌
 
-Complete analysis of all changes between v1.79.0 and v1.81.12-stable.1:
+v1.79.0 與 v1.81.12-stable.1 之間所有變更的完整分析：
 
-- **Breaking Changes**: 7 items (Docker image migration, Python version, OpenAI SDK v2, etc.)
-- **New Features**: 50+ (A2A agents, Policy Engine, Access Groups, Skills API)
-- **Bug Fixes**: 100+ (memory leaks, tool calling, streaming, cost tracking)
-- **Performance**: 15+ improvements (21% latency reduction, LRU caching)
-- **Security**: 10+ fixes (key leaks, SSRF protection, CVE patches)
+- **重大變更**：7 項（Docker 映像檔遷移、Python 版本、OpenAI SDK v2 等）
+- **新功能**：50+（A2A 代理程式、政策引擎、存取群組、技能 API）
+- **錯誤修復**：100+（記憶體洩漏、工具呼叫、串流、成本追蹤）
+- **效能**：15+ 項改進（延遲降低 21%、LRU 快取）
+- **安全性**：10+ 項修復（金鑰洩漏、SSRF 防護、CVE 修補）
 
-### Database Schema Migration
+### 資料庫結構遷移
 
-Comprehensive schema change analysis with manual SQL migration scripts:
+包含手動 SQL 遷移腳本的完整結構變更分析：
 
-- **Phase A**: v1.79.0 → v1.80.11 migrations
-- **Phase B**: v1.80.11 → v1.81.12 migrations
-- **Safe alternatives** to `prisma db push` for production environments
+- **階段 A**：v1.79.0 → v1.80.11 遷移
+- **階段 B**：v1.80.11 → v1.81.12 遷移
+- **安全替代方案**：適用於生產環境的 `prisma db push` 替代方法
 
-### PR #16895: Gemini Thought Signatures (Initial)
+### PR #16895：Gemini Thought Signatures（初始）
 
-Analysis of the initial fix for Gemini thought signature issues:
+Gemini thought signature 問題的初始修復分析：
 
-- Merged: 2025-11-21
-- Approach: Embed signatures in tool call ID format `call_<uuid>__thought__<signature>`
-- Files changed: Factory, Vertex AI handler, tests
-- Total: +374 lines
+- 合併日期：2025-11-21
+- 方法：將簽名嵌入工具呼叫 ID 格式 `call_<uuid>__thought__<signature>`
+- 變更檔案：Factory、Vertex AI 處理器、測試
+- 總計：+374 行程式碼
 
-### PR #18374: Gemini Thought Signatures (Final)
+### PR #18374：Gemini Thought Signatures（最終）
 
-Refinement that promoted the feature from beta to stable:
+將功能從 beta 提升至穩定版的改進：
 
-- Merged: 2025-12-23
-- Improvements: Pre-call hook, OpenAI Agents SDK compatibility
-- Files changed: Utils (pre-call hook), tests
-- Total: +449 lines, -186 lines
+- 合併日期：2025-12-23
+- 改進項目：前置呼叫鉤子、OpenAI Agents SDK 相容性
+- 變更檔案：Utils（前置呼叫鉤子）、測試
+- 總計：+449 行程式碼、-186 行程式碼
 
-### PR Compatibility Matrix
+### PR 相容性矩陣
 
-Tracks which LiteLLM versions include the critical fixes:
+追蹤哪些 LiteLLM 版本包含關鍵修復：
 
-| Version | PR #16895 | PR #18374 | Status |
+| 版本 | PR #16895 | PR #18374 | 狀態 |
 |---------|-----------|-----------|--------|
-| v1.79.0 | ❌ | ❌ | Current baseline |
-| v1.80.11-stable | ✅ | ✅ | **Minimum required** |
-| v1.81.12-stable.1 | ✅ | ✅ | **Target version** |
+| v1.79.0 | ❌ | ❌ | 目前基準版本 |
+| v1.80.11-stable | ✅ | ✅ | **最低需求版本** |
+| v1.81.12-stable.1 | ✅ | ✅ | **目標版本** |
 
 ---
 
-## Research Methodology
+## 研究方法
 
-Documents in this directory follow the research patterns defined in [guides/documentation-guide.md](../guides/documentation-guide.md):
+本目錄中的文件遵循 [guides/documentation-guide.md](../guides/documentation-guide.md) 中定義的研究模式：
 
-1. **Version Analysis**: Release dates, key changes, compatibility notes
-2. **PR Analysis**: Overview, problem, solution, changes table, references
-3. **Schema Analysis**: Migration paths, SQL scripts, risk assessment
+1. **版本分析**：發布日期、關鍵變更、相容性說明
+2. **PR 分析**：概覽、問題、解決方案、變更表格、參考資料
+3. **結構分析**：遷移路徑、SQL 腳本、風險評估
 
 ---
 
-*See [SUMMARY.md](../SUMMARY.md) for complete documentation navigation.*
+*請參閱 [SUMMARY.md](../SUMMARY.md) 以取得完整的文件導覽。*

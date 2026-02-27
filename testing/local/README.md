@@ -1,8 +1,8 @@
 # LiteLLM 測試指南
 
-> Local testing guide for LiteLLM proxy regression and integration tests
+> LiteLLM proxy 迴歸測試與整合測試的本機測試指南
 
-← [Back to Testing](../README.md)
+← [返回測試](../README.md)
 
 ---
 
@@ -36,7 +36,7 @@ uv run python test_regression.py --model gemini-2.5-flash
 **測試覆蓋範圍**：
 
 | 類別 | 測試項目 |
-|------|----------|
+|------|---------|
 | 健康檢查與監控 | `/health`、`/health/liveliness`、`/health/readiness` |
 | 模型列表 | `GET /v1/models`、`GET /v1/model/info` |
 | 對話補全 | 非串流、串流、使用量統計 |
@@ -58,25 +58,25 @@ uv run python test_regression.py --port 4001 --model gemini-2.5-pro
 
 ```
 ============================================================
-  LiteLLM Regression Test Baseline
+  LiteLLM 迴歸測試基準線
   Proxy: http://localhost:4000
   Model: gemini-2.5-flash
 ============================================================
 
 ============================================================
-  Health & Monitoring
+  健康檢查與監控
 ============================================================
-    GET /health returns 200
-    Health check reports healthy models
+    GET /health 回傳 200
+    健康檢查回報模型狀態良好
     ...
 
 ============================================================
-  RESULTS SUMMARY
+  結果摘要
 ============================================================
-  Passed: 28/28
-  Failed: 0/28
+  通過：28/28
+  失敗：0/28
 
-  Overall: ALL TESTS PASSED
+  整體結果：所有測試通過
 ```
 
 ### 2. Gemini 思考簽章測試（`test_gemini_signature.py`）
@@ -176,7 +176,7 @@ uv run python test_gemini_signature.py --model gemini-2.5-flash
 ## 故障排除
 
 | 問題 | 解決方案 |
-|------|----------|
+|------|---------|
 | `ERROR: Cannot reach proxy` | 先在正確連接埠啟動 LiteLLM proxy |
 | 模型不在列表中 | 確認 `VERTEX_API_KEY` 和 config.yaml 設定 |
 | 工具呼叫失敗 | 確認模型支援函式呼叫 |

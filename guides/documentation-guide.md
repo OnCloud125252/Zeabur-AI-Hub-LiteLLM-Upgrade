@@ -187,11 +187,13 @@ When you find important information, create new documents in the appropriate top
 ### 目錄結構
 
 ```
+
 project/
 ├── file1.yaml
 ├── file2.yaml
 └── config/
     └── config.yaml
+
 ```
 
 ## 2. [Next Section]
@@ -265,6 +267,7 @@ When documenting versions, include:
 4. Migration steps if needed
 
 For multi-version analysis (e.g., upgrade paths), use the pattern:
+
 - `upgrade-changelog-v1.79-to-v1.81.md` for changelog analysis
 - `db-schema-migration-v1.79-to-v1.81.md` for database schema changes
 

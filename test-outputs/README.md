@@ -1,107 +1,107 @@
-# Test Outputs
+# 測試輸出
 
-> Machine-generated test results archive
+> 機器生成的測試結果封存檔
 
-← [Back to Documentation Home](../README.md)
-
----
-
-## Test Results
-
-This directory contains machine-generated test outputs from the LiteLLM upgrade verification process.
-
-### Regression Tests
-
-| File | Version | Description |
-|------|---------|-------------|
-| `baseline-v1.79.0.txt` | v1.79.0 | Baseline regression results (28/28 passed) |
-| `regression-v1.81.12.txt` | v1.81.12 | Post-upgrade regression (28/28 passed) |
-| `rollback-v1.79.0.txt` | v1.79.0 | Rollback verification (28/28 passed) |
-
-### Gemini Signature Tests
-
-| File | Version | Description |
-|------|---------|-------------|
-| `signature-v1.79.0.txt` | v1.79.0 | Baseline (bug present) |
-| `signature-v1.81.12.txt` | v1.81.12 | Fix verified (thought_signature working) |
-
-### Performance Benchmarks
-
-| File | Version | Description |
-|------|---------|-------------|
-| `perf-v1.79.0.json` | v1.79.0 | Performance baseline |
-| `perf-v1.81.12.json` | v1.81.12 | Post-upgrade performance |
+← [返回文件首頁](../README.md)
 
 ---
 
-## Test Coverage
+## 測試結果
 
-### Regression Tests (28 tests)
+此目錄包含 LiteLLM 升級驗證過程中機器生成的測試輸出。
 
-| Category | Tests |
+### 迴歸測試
+
+| 檔案 | 版本 | 說明 |
+|------|---------|-------------|
+| `baseline-v1.79.0.txt` | v1.79.0 | 基準迴歸結果（28/28 通過） |
+| `regression-v1.81.12.txt` | v1.81.12 | 升級後迴歸測試（28/28 通過） |
+| `rollback-v1.79.0.txt` | v1.79.0 | 回滾驗證（28/28 通過） |
+
+### Gemini 簽名測試
+
+| 檔案 | 版本 | 說明 |
+|------|---------|-------------|
+| `signature-v1.79.0.txt` | v1.79.0 | 基準（存在錯誤） |
+| `signature-v1.81.12.txt` | v1.81.12 | 修復驗證（thought_signature 正常運作） |
+
+### 效能基準測試
+
+| 檔案 | 版本 | 說明 |
+|------|---------|-------------|
+| `perf-v1.79.0.json` | v1.79.0 | 效能基準 |
+| `perf-v1.81.12.json` | v1.81.12 | 升級後效能 |
+
+---
+
+## 測試覆蓋範圍
+
+### 迴歸測試（28 項測試）
+
+| 類別 | 測試項目 |
 |----------|-------|
-| Health & Monitoring | `/health`, `/health/liveliness`, `/health/readiness` |
-| Model Lists | `GET /v1/models`, `GET /v1/model/info` |
-| Chat Completions | Non-streaming, streaming, usage stats |
-| Tool Calling | Single tool, multi-turn conversations |
-| Error Handling | Invalid model, invalid auth |
-| Utility Functions | Token counting, route listing |
+| 健康狀態與監控 | `/health`、`/health/liveliness`、`/health/readiness` |
+| 模型列表 | `GET /v1/models`、`GET /v1/model/info` |
+| 聊天補全 | 非串流、串流、使用統計 |
+| 工具呼叫 | 單一工具、多輪對話 |
+| 錯誤處理 | 無效模型、無效認證 |
+| 工具函數 | Token 計數、路由列表 |
 
-### Gemini Signature Tests
+### Gemini 簽名測試
 
-Verifies the `thought_signature` fix for multi-turn tool conversations:
-1. Initial request with tool definitions
-2. Verify tool call ID contains `__thought__` signature (when applicable)
-3. Send tool result with same ID
-4. Verify final response completes without errors
+驗證多輪工具對話的 `thought_signature` 修復：
+1. 初始請求包含工具定義
+2. 驗證工具呼叫 ID 包含 `__thought__` 簽名（如適用）
+3. 使用相同 ID 發送工具結果
+4. 驗證最終回應無錯誤完成
 
-### Performance Benchmarks
+### 效能基準測試
 
-5 benchmarks × 10 rounds each:
-- Simple chat completion (non-streaming)
-- Simple chat completion (streaming)
-- Tool calling
-- Multi-turn conversation
-- Token counting
+5 項基準測試 × 每項 10 輪：
+- 簡單聊天補全（非串流）
+- 簡單聊天補全（串流）
+- 工具呼叫
+- 多輪對話
+- Token 計數
 
 ---
 
-## How to Generate
+## 生成方式
 
-### Regression Tests
+### 迴歸測試
 
 ```bash
 cd testing/local
 uv run python test_regression.py --model gemini-2.5-flash > ../../test-outputs/baseline-v1.79.0.txt
 ```
 
-### Signature Tests
+### 簽名測試
 
 ```bash
 cd testing/local
 uv run python test_gemini_signature.py --model gemini-2.5-flash > ../../test-outputs/signature-v1.81.12.txt
 ```
 
-### Performance Tests
+### 效能測試
 
 ```bash
 cd testing/local
 uv run python test_performance.py --model gemini-2.5-flash
-# Results saved to results/ directory, copy to test-outputs/
+# 結果儲存至 results/ 目錄，複製到 test-outputs/
 ```
 
 ---
 
-## Verification Summary
+## 驗證摘要
 
-| Metric | Result |
+| 指標 | 結果 |
 |--------|--------|
-| Regression Tests | 28/28 × 3 versions passed |
-| thought_signature Fix | ✅ Verified in v1.81.12 |
-| Performance Impact | Within ±5% (no regression) |
+| 迴歸測試 | 28/28 × 3 個版本通過 |
+| thought_signature 修復 | ✅ 於 v1.81.12 驗證通過 |
+| 效能影響 | 在 ±5% 範圍內（無效能衰退） |
 
-See [reports/4g-test-report.md](../reports/4g-test-report.md) for complete analysis.
+完整分析請參閱 [reports/4g-test-report.md](../reports/4g-test-report.md)。
 
 ---
 
-*See [SUMMARY.md](../SUMMARY.md) for complete documentation navigation.*
+*完整文件導覽請參閱 [SUMMARY.md](../SUMMARY.md)。*

@@ -1,16 +1,16 @@
 # 資料庫 Schema 遷移分析：v1.79.0 → v1.81.12
 
-> Database schema migration analysis with SQL scripts
+> 資料庫 schema 遷移分析與 SQL 腳本
 
-← [Back to Research](README.md)
+← [返回研究文件](README.md)
 
 ---
 
-- **Date**: 2026-02-27
-- **Status**: Complete
-- **Purpose**: 記錄 LiteLLM v1.79.0 至 v1.81.12 之間的所有 Prisma schema 變更，提供手動 SQL 遷移腳本作為 `prisma db push` 的安全替代方案。
+- **日期**: 2026-02-27
+- **狀態**: 已完成
+- **目的**: 記錄 LiteLLM v1.79.0 至 v1.81.12 之間的所有 Prisma schema 變更，提供手動 SQL 遷移腳本作為 `prisma db push` 的安全替代方案。
 
-## Summary
+## 摘要
 
 | 指標 | 數值 |
 |------|------|
@@ -20,8 +20,8 @@
 | 新增資料表 | **15 張** |
 | 修改資料表 | **12 張** |
 | 刪除資料表 | **0 張** |
-| 破壞性變更 | 7 處（unique constraint 修改） |
-| 完全可加性（additive）變更 | 95%+ |
+| 破壞性變更 | 7 處（唯一約束修改） |
+| 完全可加性變更 | 95%+ |
 
 ---
 
@@ -47,7 +47,7 @@ prisma db push --accept-data-loss  # 60 秒 timeout，最多 4 次重試
 litellm_proxy_extras.utils.ProxyExtrasDBManager.setup_database()
 ```
 
-使用 Prisma Migrations（正式遷移檔案），提供更安全的生產環境遷移。
+使用 Prisma Migrations（正式遷移檔案），提供更安全的生產環境遷移方式。
 
 ### 1.3 建議做法
 
@@ -88,7 +88,7 @@ litellm_proxy_extras.utils.ProxyExtrasDBManager.setup_database()
 | `LiteLLM_DailyTagSpend` | 新增 `request_id` 欄位 | 可加性 ✅ |
 | `LiteLLM_PromptTable` | unique constraint 變更 | ⚠️ 破壞性 |
 
-**`LiteLLM_PromptTable` 破壞性變更詳細說明：**
+**`LiteLLM_PromptTable` 破壞性變更詳細資訊：**
 
 ```
 v1.79.0: prompt_id String @unique
@@ -98,7 +98,7 @@ v1.80.11: prompt_id String (不再 @unique)
           + @@index([prompt_id])
 ```
 
-原本的單欄 unique 約束被移除，改為 `(prompt_id, version)` 複合唯一約束，支援 prompt 版本控制。
+原本的單欄唯一約束被移除，改為 `(prompt_id, version)` 複合唯一約束，支援 prompt 版本控制。
 
 ---
 
@@ -125,18 +125,18 @@ v1.80.11: prompt_id String (不再 @unique)
 | `LiteLLM_VerificationToken` | 新增 `router_settings`、`policies`、`access_group_ids` + 3 個索引 | 可加性 ✅ |
 | `LiteLLM_ManagedVectorStoresTable` | 新增 `team_id`、`user_id` + 索引 | 可加性 ✅ |
 | `LiteLLM_GuardrailsTable` | 新增 `team_id` | 可加性 ✅ |
-| **6 張 Daily Spend 表** | 新增 `endpoint` 欄位 + unique constraint 變更 | ⚠️ 破壞性 |
+| **6 張 Daily Spend 資料表** | 新增 `endpoint` 欄位 + 唯一約束變更 | ⚠️ 破壞性 |
 
-**Daily Spend 表 unique constraint 變更：**
+**Daily Spend 資料表唯一約束變更：**
 
-所有 6 張 Daily Spend 表（User、Organization、EndUser、Agent、Team、Tag）的 unique constraint 都新增了 `endpoint` 欄位：
+所有 6 張 Daily Spend 資料表（User、Organization、EndUser、Agent、Team、Tag）的唯一約束都新增了 `endpoint` 欄位：
 
 ```
 v1.80.11: @@unique([user_id, date, api_key, model, custom_llm_provider, mcp_namespaced_tool_name])
 v1.81.12: @@unique([user_id, date, api_key, model, custom_llm_provider, mcp_namespaced_tool_name, endpoint])
 ```
 
-**風險評估**：由於新增的 `endpoint` 欄位為 nullable，現有資料的 `endpoint` 值為 `NULL`。PostgreSQL 中 `NULL` 在 unique constraint 中被視為不同值，因此不會產生資料衝突。但必須先丟棄舊的 unique constraint 再建立新的。
+**風險評估**：由於新增的 `endpoint` 欄位為 nullable，現有資料的 `endpoint` 值為 `NULL`。PostgreSQL 中 `NULL` 在唯一約束中被視為不同值，因此不會產生資料衝突。但必須先丟棄舊的唯一約束再建立新的。
 
 #### Generator 變更
 
@@ -146,13 +146,13 @@ v1.81.12: + binaryTargets = ["native", "debian-openssl-1.1.x", "debian-openssl-3
                              "linux-musl", "linux-musl-openssl-3.0.x"]
 ```
 
-此變更不影響資料庫 schema，僅影響 Prisma client 二進位檔生成。
+此變更不影響資料庫 schema，僅影響 Prisma client 二進位檔案產生。
 
 ---
 
 ### 2.3 Extras Schema 比較
 
-`litellm-proxy-extras` 的 schema 檔案在每個版本中都與主 schema **完全一致**。使用 `prisma db push` 或 `prisma migrate` 都會產生相同的目標 schema。
+`litellm-proxy-extras` 的 schema 檔案在每個版本中都與主要 schema **完全一致**。使用 `prisma db push` 或 `prisma migrate` 都會產生相同的目標 schema。
 
 ---
 
@@ -394,13 +394,13 @@ ALTER TABLE "LiteLLM_ManagedFileTable"
 ALTER TABLE "LiteLLM_DailyTagSpend"
     ADD COLUMN IF NOT EXISTS "request_id" TEXT;
 
--- PromptTable: unique constraint 變更（破壞性）
+-- PromptTable: 唯一約束變更（破壞性）
 ALTER TABLE "LiteLLM_PromptTable"
     ADD COLUMN IF NOT EXISTS "version" INTEGER NOT NULL DEFAULT 1;
--- 移除舊的 unique constraint（如果存在）
+-- 移除舊的唯一約束（如果存在）
 ALTER TABLE "LiteLLM_PromptTable"
     DROP CONSTRAINT IF EXISTS "LiteLLM_PromptTable_prompt_id_key";
--- 建立新的複合 unique constraint
+-- 建立新的複合唯一約束
 CREATE UNIQUE INDEX IF NOT EXISTS "LiteLLM_PromptTable_prompt_id_version_key"
     ON "LiteLLM_PromptTable"("prompt_id", "version");
 CREATE INDEX IF NOT EXISTS "LiteLLM_PromptTable_prompt_id_idx"
@@ -664,7 +664,7 @@ CREATE INDEX IF NOT EXISTS "LiteLLM_ManagedVectorStoresTable_user_id_idx"
 ALTER TABLE "LiteLLM_GuardrailsTable"
     ADD COLUMN IF NOT EXISTS "team_id" TEXT;
 
--- ─── Daily Spend 表 unique constraint 變更（破壞性）──
+-- ─── Daily Spend 資料表唯一約束變更（破壞性）──
 
 -- DailyUserSpend
 ALTER TABLE "LiteLLM_DailyUserSpend"
@@ -759,7 +759,7 @@ COMMIT;
 
 ### 4.1 安全的可加性變更（95%）
 
-- 所有 15 張新表都是 `CREATE TABLE IF NOT EXISTS`
+- 所有 15 張新資料表都是 `CREATE TABLE IF NOT EXISTS`
 - 所有新欄位都是 nullable 或有預設值
 - 新索引不影響現有資料
 
@@ -767,21 +767,21 @@ COMMIT;
 
 | 變更 | 風險 | 說明 |
 |------|------|------|
-| PromptTable unique constraint | MEDIUM | 先加 `version` 欄位，再換 constraint |
-| 6x Daily Spend unique constraint | MEDIUM | 先加 `endpoint` 欄位，再換 constraint |
+| PromptTable 唯一約束 | MEDIUM | 先加 `version` 欄位，再替換唯一約束 |
+| 6x Daily Spend 唯一約束 | MEDIUM | 先加 `endpoint` 欄位，再替換唯一約束 |
 
 **關鍵風險點**：
 
-- `DROP CONSTRAINT` 操作需要取得表鎖，在高負載下可能導致短暫阻塞
+- `DROP CONSTRAINT` 操作需要取得資料表鎖定，在高負載下可能導致短暫阻塞
 - 建議在低流量時段執行
-- PostgreSQL 的 `NULL` 在 unique constraint 中被視為不同值，所以新增 nullable 欄位後不會違反約束
+- PostgreSQL 的 `NULL` 在唯一約束中被視為不同值，所以新增 nullable 欄位後不會違反約束
 
 ### 4.3 `prisma db push --accept-data-loss` 的風險
 
 `--accept-data-loss` 旗標意味著 Prisma 可能：
 
 - 自動丟棄不相容的欄位資料
-- 重建有結構性變更的表
+- 重建有結構性變更的資料表
 
 **建議**：生產環境使用手動 SQL 遷移，設定 `DISABLE_SCHEMA_UPDATE=true`。
 

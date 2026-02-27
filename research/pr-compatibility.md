@@ -1,6 +1,6 @@
 # LiteLLM PR 相容性報告
 
-> PR compatibility matrix for thought signature fixes
+> PR 相容性矩陣，用於思考簽章修復
 
 ← [Back to Research](README.md)
 
