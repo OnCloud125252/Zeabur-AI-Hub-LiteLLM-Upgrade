@@ -10,7 +10,7 @@
 | **Status** | ✅ Merged |
 | **Created** | 2025-11-20 |
 | **Merged** | 2025-11-21 |
-| **URL** | https://github.com/BerriAI/litellm/pull/16895 |
+| **URL** | <https://github.com/BerriAI/litellm/pull/16895> |
 
 ## Summary
 
@@ -50,6 +50,7 @@ call_<uuid>__thought__<signature>
 ```
 
 Example:
+
 ```
 call_00d09e4f03654b668abe3e361f1e__thought__CsoDAePx/140cmKGChx3tcqSw7eWw+UgW8B...
 ```

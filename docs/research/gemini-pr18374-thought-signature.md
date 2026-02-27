@@ -10,7 +10,7 @@
 | **Status** | ✅ Merged |
 | **Created** | 2025-12-23 |
 | **Merged** | 2025-12-23 |
-| **URL** | https://github.com/BerriAI/litellm/pull/18374 |
+| **URL** | <https://github.com/BerriAI/litellm/pull/18374> |
 | **Fixes** | #18160 |
 
 ## Summary
@@ -39,6 +39,7 @@ This PR refines the Gemini thought signature feature initially introduced in PR 
 ### Pre-Call Hook
 
 The new pre-call hook in `litellm/utils.py` provides:
+
 - Detection of thought signatures embedded in tool call IDs
 - Extraction and proper handling of signatures before API calls
 - Validation of tool call formatting
@@ -48,6 +49,7 @@ The new pre-call hook in `litellm/utils.py` provides:
 #### `litellm/utils.py` (+157 lines)
 
 Added utility functions for:
+
 - Parsing tool call IDs for thought signatures
 - Extracting signatures when present
 - Reconstructing proper tool call payloads for Gemini API
@@ -71,6 +73,7 @@ LiteLLM proxy server tested with tool calls containing thought signatures.
 ### 3. OpenAI Agents SDK Testing
 
 Verified compatibility with:
+
 - Gemini models through LiteLLM
 - OpenAI Agents SDK with Gemini backend
 
@@ -89,6 +92,7 @@ The tool call flow works seamlessly:
 
 1. **First Request**: Client sends tool call request
 2. **Gemini Response**: Returns tool call with signature embedded in ID
+
    ```json
    {
      "tool_calls": [{
@@ -97,6 +101,7 @@ The tool call flow works seamlessly:
      }]
    }
    ```
+
 3. **Follow-up Request**: Client returns tool result with the same tool call ID
 4. **Pre-call Hook**: LiteLLM extracts the thought signature from the ID
 5. **Gemini API**: Receives the proper signature for context continuity

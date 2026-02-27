@@ -15,16 +15,16 @@ Zeabur AI Hub 是 Zeabur 平台上的 AI 模型聚合服務，底層基於 LiteL
 
 關於 LiteLLM 的詳細介紹，可以參考 [LiteLLM 官方文件](https://docs.litellm.ai/)。
 
-
 # 需求說明
 
 本次任務的核心目標是：將 LiteLLM 從 v1.79.0-stable 升級到最新穩定版本，確保 downtime 盡量少，升級後所有功能和資料都正常。
 
-
 ## 已知問題
 
 升級需要驗證修復的已知問題：
+
 ### Gemini thought_signature 503 錯誤
+
 ```json
 {
   "error": {
@@ -37,6 +37,7 @@ Zeabur AI Hub 是 Zeabur 平台上的 AI 模型聚合服務，底層基於 LiteL
 ```
 
 #### Google Vertex AI error (Extracted from LiteLLM logs)
+
 ```json
 {
   "error": {
@@ -49,18 +50,19 @@ Zeabur AI Hub 是 Zeabur 平台上的 AI 模型聚合服務，底層基於 LiteL
 
 該問題由 [PR #16895](https://github.com/BerriAI/litellm/pull/16895) 和 [PR #18374](https://github.com/BerriAI/litellm/pull/18374) 修復，升級後需驗證此情境是否正常運作。
 
-
 ## 任務要求
 
 請按以下步驟完成升級方案的調研與執行：
 
 ### 第一階段：環境準備與舊版本運行驗證
+
 1. 在本機環境安裝並運行當前版本 v1.79.0-stable 的 LiteLLM
 2. 記錄當前 LiteLLM 使用的完整設定（config.yaml、環境變數、資料庫 schema 等）
 3. 盤點當前正在使用的功能清單（模型列表、API 端點、驗證方式等）
 4. 建立功能迴歸測試基準線：記錄各核心功能的預期行為
 
 ### 第二階段：版本差異分析與升級方案設計
+
 1. 確認上游最新穩定版本號，逐版本閱讀 [Release Notes](https://github.com/BerriAI/litellm/releases)
 2. 標記與當前使用情境相關的變更，識別所有潛在的 breaking changes 並記錄影響範圍
 3. 重點檢查資料庫 schema 變更：比對 Prisma migration files，詳細記錄每個版本引入的資料庫異動
@@ -70,6 +72,7 @@ Zeabur AI Hub 是 Zeabur 平台上的 AI 模型聚合服務，底層基於 LiteL
 7. 設計升級方案，明確：回滾策略、資料遷移步驟、預估 downtime
 
 ### 第三階段：本機環境升級驗證
+
 1. 在本機環境中執行升級（從 v1.79.0 → 最新穩定版）
 2. 執行資料庫遷移，驗證資料完整性
 3. 執行功能迴歸測試，逐項確認核心功能正常
@@ -80,6 +83,7 @@ Zeabur AI Hub 是 Zeabur 平台上的 AI 模型聚合服務，底層基於 LiteL
 ### 第四階段：方案交付與上線建議
 
 輸出完整的升級方案文件，包含：
+
 - 版本變更 changelog（新功能、bug fix、效能改善、breaking changes）
 - 資料庫遷移說明（逐版本的 schema 異動記錄）
 - 設定變更對照表
@@ -90,14 +94,15 @@ Zeabur AI Hub 是 Zeabur 平台上的 AI 模型聚合服務，底層基於 LiteL
 
 如果評估後認為無法進行升級，需要詳細說明原因，包括具體的技術障礙和風險點。
 
-
 ## 升級原則
+
 1. **Downtime 盡量少**：優先考慮能實現零停機或近零停機的升級方案
 2. **資料安全第一**：升級前必須完成資料庫備份，確保可回滾
 3. **功能完整性**：升級後所有現有功能必須正常運作
 4. **善用 AI**：鼓勵使用 Claude、Cursor 等 AI 工具輔助程式碼審查、設定遷移和問題排查
 
 ## 你會需要
-- LiteLLM 官方儲存庫：https://github.com/BerriAI/litellm
-- LiteLLM 官方文件：https://docs.litellm.ai/
-- LiteLLM Release Notes：https://github.com/BerriAI/litellm/releases
+
+- LiteLLM 官方儲存庫：<https://github.com/BerriAI/litellm>
+- LiteLLM 官方文件：<https://docs.litellm.ai/>
+- LiteLLM Release Notes：<https://github.com/BerriAI/litellm/releases>

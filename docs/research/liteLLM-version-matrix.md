@@ -35,13 +35,14 @@ This document tracks the availability of two Gemini thought signature-related PR
 | v1.81.0-stable | 2026-01-24 | ✅ | ✅ | |
 | v1.81.3-stable | 2026-02-08 | ✅ | ✅ | |
 | v1.81.9-stable | 2026-02-15 | ✅ | ✅ | |
-| v1.81.12-stable | 2026-02-21 | ✅ | ✅ | **Latest stable** |
+| **v1.81.12-stable.1** | 2026-02-24 | ✅ | ✅ | **Latest stable** |
 
 ---
 
 ## Recommendation
 
 ### Minimum Required Version
+
 To use features from **both** PRs, upgrade to at least:
 
 ```
@@ -49,8 +50,9 @@ v1.80.11-stable
 ```
 
 ### Suggested Upgrade Path
+
 - **Conservative**: `v1.80.11-stable` - Earliest stable with both fixes
-- **Recommended**: `v1.81.12-stable` - Latest stable with additional improvements
+- **Recommended**: `v1.81.12-stable.1` - Latest stable with additional improvements
 
 ---
 
