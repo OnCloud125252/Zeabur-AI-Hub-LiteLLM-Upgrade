@@ -3,7 +3,7 @@
 testing/.env
 
 # Cloned LiteLLM repositories (large, reproducible)
-testing/litellm-v*/
+testing/litellm-*
 
 # Python
 .venv/

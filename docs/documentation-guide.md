@@ -1,4 +1,4 @@
-# Writing Guide
+# Documentation Writing Guide
 
 Guidelines for creating and organizing documents in this project.
 
