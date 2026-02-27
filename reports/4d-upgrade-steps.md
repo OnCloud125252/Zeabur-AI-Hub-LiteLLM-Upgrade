@@ -285,6 +285,7 @@ call_9d5001a4996649f9b2da20855b39__thought__Co8CAb4+9vtqDGoRj3RPv/...
 ```
 
 如果 tool call ID 不包含 `__thought__`，請確認：
+
 1. `config.yaml` 中 `enable_preview_features: true` 已設定
 2. 使用的模型支援 thinking mode（如 gemini-2.5-flash、gemini-3-pro）
 

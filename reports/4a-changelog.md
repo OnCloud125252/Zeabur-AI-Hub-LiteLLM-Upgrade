@@ -218,61 +218,72 @@ Zeabur 使用 Python 3.12，無影響。
 ## 6. 逐版本摘要
 
 ### v1.79.1-stable（2025-11-08）
+
 - FAL AI 圖片生成支援
 - Azure ContextWindowExceededError 正確映射
 - OpenTelemetry 外部 tracer context 傳播
 
 ### v1.79.3-stable（2025-11-15）
+
 - Vertex/Gemini Videos API + 成本追蹤
 - Content Filter Guard 防護功能
 - Node.js runtime 修復（Prisma 所需）
 
 ### v1.80.0-stable.1（2025-11-24）
+
 - GPT-5.1 / GPT-5.1-codex 家族支援
 - A2A agent 協定
 - Prometheus OSS 化
 - Model Access Group API
 
 ### v1.80.5-stable（2025-12-03）
+
 - **PR #16895：thought_signature 嵌入 tool call ID**（核心修復）
 - Gemini 3 Pro Image 模型支援
 - MCP Hub
 - Anthropic Structured Output
 
 ### v1.80.8-stable（2025-12-14）
+
 - Guardrails API 支援 tool call 檢查
 - Cursor BYOK 自訂設定
 - Background health checks 寫入資料庫
 
 ### v1.80.11-stable（2026-01-10）
+
 - **PR #18374：thought_signature pre-call hook 正式化**（核心修復完成）
 - Unified Skills API
 - RAG Search API + Reranker
 - 41 個 configuration 類別 lazy loading
 
 ### v1.80.15-stable（2026-01-17）
+
 - Prisma 遷移內建鎖
 - 92.7% provider config 查詢加速
 - Prometheus 快取指標
 - RDS IAM token 主動更新
 
 ### v1.81.0-stable（2026-01-24）
+
 - OOM 修復：`MAX_IMAGE_URL_DOWNLOAD_SIZE_MB`（預設 50MB）
 - Deleted Keys/Teams 審計表 UI
 
 ### v1.81.3-stable（2026-02-08）
+
 - Policy Engine
 - 21% chat_completion 延遲降低
 - MCP 工具回應整合至 chat completions
 - 多項 HTTP client 記憶體洩漏修復
 
 ### v1.81.9-stable（2026-02-15）
+
 - Claude Opus 4.6 全面支援
 - Access Groups
 - Team soft budget + email 警報
 - Prometheus budget 指標 40% CPU 降低
 
 ### v1.81.12-stable.1（2026-02-24）
+
 - Guardrail pipeline 條件序列執行
 - Scaleway provider 支援
 - MCP StreamableHTTP stateless 修復

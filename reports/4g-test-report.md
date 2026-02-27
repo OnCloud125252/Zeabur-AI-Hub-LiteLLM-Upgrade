@@ -103,6 +103,7 @@ v1.79.0 基線 → DB 遷移 → v1.81.12 升級 → 回滾至 v1.79.0
 | 28 | 工具 | GET /routes 返回 200 | 通過 | 通過 | 通過 |
 
 **報告檔案**：
+
 - `reports/test-outputs/baseline-v1.79.0.txt`
 - `reports/test-outputs/regression-v1.81.12.txt`
 - `reports/test-outputs/rollback-v1.79.0.txt`
@@ -152,6 +153,7 @@ call_9d5001a4996649f9b2da20855b39__thought__Co8CAb4+9vtqDGoRj3RPv/40SN2X...
 `__thought__` 分隔符後方的 Base64 編碼字串即為 Gemini 的 thought signature，可在後續請求中回傳給 Gemini API，避免 503 錯誤。
 
 **報告檔案**：
+
 - `reports/test-outputs/signature-v1.79.0.txt`
 - `reports/test-outputs/signature-v1.81.12.txt`
 
@@ -198,6 +200,7 @@ call_9d5001a4996649f9b2da20855b39__thought__Co8CAb4+9vtqDGoRj3RPv/40SN2X...
 - 整體結論：升級**不會造成效能退步**
 
 **報告檔案**：
+
 - `reports/test-outputs/perf-v1.79.0.json`
 - `reports/test-outputs/perf-v1.81.12.json`
 
