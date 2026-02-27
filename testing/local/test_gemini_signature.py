@@ -19,10 +19,10 @@ import argparse
 import time
 
 
-def create_client(port: int) -> openai.OpenAI:
+def create_client(host: str, port: int) -> openai.OpenAI:
     return openai.OpenAI(
         api_key="sk-test-key-1234",
-        base_url=f"http://localhost:{port}",
+        base_url=f"http://{host}:{port}",
     )
 
 
@@ -232,15 +232,16 @@ def test_multi_turn_tool_calls(client: openai.OpenAI, model: str) -> bool:
 
 def main():
     parser = argparse.ArgumentParser(description="Test Gemini thought_signature fix")
+    parser.add_argument("--host", type=str, default="localhost", help="LiteLLM proxy host")
     parser.add_argument("--port", type=int, default=4000, help="LiteLLM proxy port")
     parser.add_argument("--model", type=str, default="gemini-2.5-flash", help="Model name to test")
     args = parser.parse_args()
 
-    client = create_client(args.port)
+    client = create_client(args.host, args.port)
 
     print("=" * 60)
     print(f"Gemini thought_signature Integration Test")
-    print(f"Proxy: http://localhost:{args.port}")
+    print(f"Proxy: http://{args.host}:{args.port}")
     print(f"Model: {args.model}")
     print("=" * 60)
 

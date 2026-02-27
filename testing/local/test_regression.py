@@ -432,11 +432,12 @@ def test_routes(base_url: str):
 
 def main():
     parser = argparse.ArgumentParser(description="LiteLLM regression test baseline")
+    parser.add_argument("--host", type=str, default="localhost", help="Proxy host")
     parser.add_argument("--port", type=int, default=4000, help="Proxy port")
     parser.add_argument("--model", type=str, default="gemini-2.5-flash", help="Model to test")
     args = parser.parse_args()
 
-    base_url = f"http://localhost:{args.port}"
+    base_url = f"http://{args.host}:{args.port}"
     client = openai.OpenAI(api_key=MASTER_KEY, base_url=base_url)
 
     print("=" * 60)
