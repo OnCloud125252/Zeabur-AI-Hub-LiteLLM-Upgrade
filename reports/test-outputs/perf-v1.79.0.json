@@ -1,0 +1,59 @@
+{
+  "host": "10.0.1.9",
+  "port": 4000,
+  "model": "gemini-2.5-flash",
+  "rounds": 10,
+  "timestamp": "2026-02-27T20:53:05",
+  "benchmarks": {
+    "chat_completion": {
+      "samples": 10,
+      "errors": 0,
+      "min": 0.683,
+      "max": 0.979,
+      "mean": 0.777,
+      "median": 0.732,
+      "stdev": 0.102,
+      "p95": 0.979
+    },
+    "streaming_full": {
+      "samples": 10,
+      "errors": 0,
+      "min": 0.812,
+      "max": 1.275,
+      "mean": 1.029,
+      "median": 1.025,
+      "stdev": 0.135,
+      "p95": 1.275
+    },
+    "time_to_first_byte": {
+      "samples": 10,
+      "errors": 0,
+      "min": 0.842,
+      "max": 0.962,
+      "mean": 0.9,
+      "median": 0.905,
+      "stdev": 0.038,
+      "p95": 0.962
+    },
+    "tool_call": {
+      "samples": 10,
+      "errors": 0,
+      "min": 1.0,
+      "max": 2.16,
+      "mean": 1.364,
+      "median": 1.254,
+      "stdev": 0.337,
+      "p95": 2.16
+    },
+    "multi_turn_tool": {
+      "samples": 10,
+      "errors": 0,
+      "min": 1.848,
+      "max": 3.279,
+      "mean": 2.39,
+      "median": 2.304,
+      "stdev": 0.399,
+      "p95": 3.279
+    }
+  }
+}
