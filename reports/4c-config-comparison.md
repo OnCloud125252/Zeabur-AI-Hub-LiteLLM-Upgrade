@@ -92,6 +92,56 @@ general_settings:
 
 ---
 
+## 2.5 資料庫連線池設定建議
+
+### 預設值變更影響
+
+| 版本 | 預設值 | 可能影響 |
+|------|--------|----------|
+| v1.79.0 | 100 | 高併發下有較多連線可用 |
+| v1.81.12 | 10 | 可能導致連線等待，增加延遲 |
+
+### 建議設定公式
+
+```
+連線池大小 = (CPU 核心數 × 2) + 有效磁碟數
+```
+
+對於典型的 4 核心 PostgreSQL：
+
+- **開發/測試環境**：保持 10（預設）
+- **生產環境（< 1000 QPS）**：設為 20-30
+- **生產環境（> 1000 QPS）**：設為 50-100
+
+### 設定方式
+
+在 `config.yaml` 的 `general_settings` 中：
+
+```yaml
+general_settings:
+  database_connection_pool_limit: 50  # 根據負載調整
+```
+
+或在環境變數中：
+
+```bash
+DATABASE_CONNECTION_POOL_LIMIT=50
+```
+
+### 驗證方式
+
+```sql
+-- 監控當前連線數
+SELECT count(*) FROM pg_stat_activity
+WHERE datname = 'litellm' AND state = 'active';
+
+-- 監控等待中的連線
+SELECT count(*) FROM pg_stat_activity
+WHERE datname = 'litellm' AND wait_event_type = 'Client';
+```
+
+---
+
 ## 3. 無需變更
 
 以下項目已驗證**完全相容**，不需任何修改：

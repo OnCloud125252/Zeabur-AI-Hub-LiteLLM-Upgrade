@@ -101,6 +101,23 @@ psql -h <db-host> -U llmproxy -d litellm
 
 SQL 腳本位於：`testing/remote/migrations/migration_phase_a.sql`
 
+### 2.5 執行時間估算
+
+| 資料庫大小 | 預估時間 |
+|------------|----------|
+| 小型資料庫 (< 1GB) | 30-60 秒 |
+| 中型資料庫 (1-10GB) | 2-5 分鐘 |
+| 大型資料庫 (> 10GB) | 10-30 分鐘 |
+
+> **注意**：ALTER TABLE 操作會鎖表，建議在低流量時段執行。
+
+```sql
+-- 進度查詢（在另一個終端執行）
+-- SELECT now(), query, state, wait_event_type
+-- FROM pg_stat_activity
+-- WHERE datname = 'litellm';
+```
+
 ---
 
 ## 3. Phase B 遷移：v1.80.11 → v1.81.12
@@ -149,6 +166,23 @@ psql -h <db-host> -U llmproxy -d litellm
 ```
 
 SQL 腳本位於：`testing/remote/migrations/migration_phase_b.sql`
+
+### 3.5 執行時間估算
+
+| 資料庫大小 | 預估時間 |
+|------------|----------|
+| 小型資料庫 (< 1GB) | 30-60 秒 |
+| 中型資料庫 (1-10GB) | 2-5 分鐘 |
+| 大型資料庫 (> 10GB) | 10-30 分鐘 |
+
+> **注意**：ALTER TABLE 操作會鎖表，建議在低流量時段執行。
+
+```sql
+-- 進度查詢（在另一個終端執行）
+-- SELECT now(), query, state, wait_event_type
+-- FROM pg_stat_activity
+-- WHERE datname = 'litellm';
+```
 
 ---
 
