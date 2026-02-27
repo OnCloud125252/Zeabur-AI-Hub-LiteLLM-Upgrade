@@ -11,8 +11,9 @@ Research and plan the LiteLLM upgrade from v1.79.0-stable → v1.81.12-stable.1 
 | File | Purpose |
 |------|---------|
 | `requirements.md` | Project requirements and dependencies |
-| `reports/phase1-upgrade-report.md` | Phase 1 upgrade report |
-| `reports/upgrade-plan-2026-02.md` | Upgrade plan with rollback strategy |
+| `reports/1-upgrade-report.md` | Phase 1 upgrade report |
+| `reports/2-upgrade-plan.md` | Upgrade plan with rollback strategy |
+| `docs/plans/3-local-upgrade-verification.md` | Phase 3 local verification plan |
 | `docs/research/upgrade-changelog-v1.79-to-v1.81.md` | Version-by-version changelog (11 releases) |
 | `docs/research/db-schema-migration-v1.79-to-v1.81.md` | Database schema migration analysis + SQL |
 | `docs/research/pr-16895.md` | PR #16895 analysis (thought signatures) |
@@ -30,11 +31,14 @@ Research and plan the LiteLLM upgrade from v1.79.0-stable → v1.81.12-stable.1 
 ├── CLAUDE.md                           # Inherits from ~/CLAUDE.md
 ├── requirements.md                     # Project requirements
 ├── reports/
-│   ├── phase1-upgrade-report.md       # Phase 1 complete report
-│   └── upgrade-plan-2026-02.md        # Upgrade plan with rollback
+│   ├── 1-upgrade-report.md            # Phase 1 complete report
+│   └── 2-upgrade-plan.md              # Upgrade plan with rollback
 ├── docs/
 │   ├── documentation-guide.md          # Documentation conventions
 │   ├── python-setup.md                 # UV usage guide
+│   ├── remote-docker-server.md         # Remote Docker server docs
+│   ├── plans/                          # Phase plans
+│   │   └── 3-local-upgrade-verification.md
 │   └── research/
 │       ├── upgrade-changelog-v1.79-to-v1.81.md  # Version changelog
 │       ├── db-schema-migration-v1.79-to-v1.81.md # DB schema diff
@@ -72,3 +76,9 @@ Research and plan the LiteLLM upgrade from v1.79.0-stable → v1.81.12-stable.1 
 1. Read `requirements.md` for full requirements
 2. Check existing research in `docs/research/`
 3. Follow `reports/upgrade-plan-2026-02.md` for the upgrade procedure
+
+## Remote Docker Server
+
+`root@10.0.1.9`
+
+See [docs/remote-docker-server.md](docs/remote-docker-server.md) for usage examples.
