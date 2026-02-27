@@ -1,9 +1,18 @@
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
 # Secrets
 .env
-testing/.env
+testing/*/.env
 
 # Cloned LiteLLM repositories (large, reproducible)
-testing/litellm-*
+# These are stored as submodules - ignore both the directory and any nested .git
+testing/local/litellm-*
 
 # Python
 .venv/
