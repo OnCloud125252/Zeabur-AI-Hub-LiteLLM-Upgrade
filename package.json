@@ -1,0 +1,8 @@
+{
+  "name": "zeabur-ai-hub-litellm-upgrade",
+  "type": "module",
+  "scripts": {
+    "check-md:fix": "markdownlint-cli2 --config ~/.markdownlint-cli2.jsonc --fix \"**/*.md\" \"#node_modules\" \"#dist\" \"#docker-utils\" \"#testing/litellm*\" \"#testing/litellm-v*\" \"#.venv\" \"#__pycache__\" \"#*.pyc\" \"#.pytest_cache\" \"#*.egg-info\""
+  },
+  "private": true
+}
