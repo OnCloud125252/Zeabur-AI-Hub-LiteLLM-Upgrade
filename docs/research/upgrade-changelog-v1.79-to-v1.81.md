@@ -1,8 +1,8 @@
 # 版本差異分析：LiteLLM v1.79.0 → v1.81.12-stable.1
 
-**Date**: 2026-02-27
-**Status**: Complete
-**Purpose**: 記錄 LiteLLM v1.79.0-stable 至 v1.81.12-stable.1 之間的所有變更，並評估對 Zeabur AI Hub 的影響。
+- **Date**: 2026-02-27
+- **Status**: Complete
+- **Purpose**: 記錄 LiteLLM v1.79.0-stable 至 v1.81.12-stable.1 之間的所有變更，並評估對 Zeabur AI Hub 的影響。
 
 ## Summary
 

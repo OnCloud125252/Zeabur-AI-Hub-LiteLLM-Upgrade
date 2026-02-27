@@ -9,34 +9,95 @@ When you find important information, create new documents in `docs/`:
 | Document Type | Location | When to Create |
 |---------------|----------|----------------|
 | Research notes | `docs/research/` | When investigating specific PRs, issues, or features |
-| Version analysis | Root or `docs/` | When analyzing version changes, breaking changes |
-| Findings/Reports | Root | When delivering conclusions or recommendations |
+| Implementation plans | `docs/plans/` | When planning phased implementation or verification steps |
+| Version analysis | `docs/research/` | When analyzing version changes, breaking changes |
+| Findings/Reports | `reports/` | When delivering conclusions or recommendations |
 | How-to guides | `docs/` | When explaining how to accomplish specific tasks |
 
 ## Naming Conventions
 
-- Use lowercase with hyphens: `pr-12345-analysis.md`
-- Use descriptive names: `upgrade-changelog-v1.80.md` not `notes.md`
-- Include date for reports: `upgrade-plan-2026-02.md`
-- Use prefixes for research: `pr-`, `issue-`, `version-`
+- Use lowercase with hyphens: `pr-12345.md`
+- Use descriptive names: `upgrade-changelog-v1.79-to-v1.81.md` not `notes.md`
+- Use phase numbering for plans: `3-local-upgrade-verification.md`
+- Use prefixes for research: `pr-`, `issue-`, `version-`, `db-schema-migration-`
+- Reports use numbered prefix: `1-upgrade-report.md`, `2-upgrade-plan.md`
 
 ## Document Templates
 
 ### Research Document Template
 
 ```markdown
-# [Title]
+# PR #[Number]: [Title]
 
-**Date**: YYYY-MM-DD
-**Purpose**: [What this document captures]
+## Overview
+
+| Field | Value |
+|-------|-------|
+| **PR Number** | #[Number] |
+| **Title** | [Full PR title] |
+| **Author** | [GitHub username] |
+| **Status** | Merged/Open/Draft |
+| **Created** | YYYY-MM-DD |
+| **Merged** | YYYY-MM-DD (if applicable) |
+| **URL** | <https://github.com/BerriAI/litellm/pull/[Number]> |
 
 ## Summary
 
-[Brief overview - 2-3 sentences]
+[Brief overview of what this PR does - 2-3 sentences]
 
-## Details
+### The Problem
 
-[Content]
+[Describe the issue being solved]
+
+### The Solution
+
+[Describe the approach taken]
+
+## Changes
+
+| File | Additions | Deletions | Description |
+|------|-----------|-----------|-------------|
+| `path/to/file.py` | 100 | 50 | What changed |
+
+**Total:** +X lines, -Y lines
+
+## References
+
+- [Link 1]
+- [Link 2]
+```
+
+### Version Analysis Template
+
+```markdown
+# 版本差異分析：LiteLLM v[X.Y] → v[X.Y]
+
+- **Date**: YYYY-MM-DD
+- **Status**: Complete/In Progress
+- **Purpose**: [What this analysis captures]
+
+## Summary
+
+[Brief overview in Chinese - 2-3 sentences]
+
+### 版本總覽
+
+| 版本 | 發佈日期 | 主要變更重點 |
+|------|----------|-------------|
+| vX.Y.Z | YYYY-MM-DD | Change description |
+
+### 變更類別統計
+
+| 類別 | 數量 | 說明 |
+|------|------|------|
+| 破壞性變更 | N | Description |
+| 新功能 | N | Description |
+
+---
+
+## 1. 破壞性變更
+
+[Detailed breaking changes]
 
 ## References
 
@@ -47,23 +108,33 @@ When you find important information, create new documents in `docs/`:
 ### Report Template
 
 ```markdown
-# [Report Title]
+# [Report Title in Chinese]
 
-**Date**: YYYY-MM-DD
-**Status**: [In Progress / Complete / Blocked]
+- **Date**: YYYY-MM-DD
+- **Purpose**: [What this report captures]
 
 ## Summary
 
-| Item | Status |
-|------|--------|
-| Task 1 | Complete |
-| Task 2 | Complete |
+[Overview in Chinese - what was accomplished]
 
-## Section 1: [Title]
+| # | 任務 | 狀態 | 成果物 |
+|---|------|------|--------|
+| 1 | Task 1 | 完成 | Deliverable 1 |
+| 2 | Task 2 | 完成 | Deliverable 2 |
 
-[Content]
+---
 
-## Section 2: [Title]
+## 1. [Section Title]
+
+### [Subsection]
+
+[Content with tables for data]
+
+| 項目 | 值 |
+|------|---|
+| Key | Value |
+
+## 2. [Next Section]
 
 [Content]
 
@@ -83,35 +154,47 @@ When you find important information, create new documents in `docs/`:
 - [Link 2]
 ```
 
-### Upgrade Plan Template
+### Phase Plan Template
 
 ```markdown
-# Upgrade Plan: [From Version] → [To Version]
+# [Phase Title]
 
-**Date**: YYYY-MM-DD
-**Target Version**: vX.Y.Z-stable
+- **Date**: YYYY-MM-DD
+- **Phase**: [Phase Number] - [Phase Name]
+- **Target Version**: vX.Y.Z-stable
+- **Environment**: [Development/Remote Docker/Production]
+- **Status**: Planning/In Progress/Complete
 
-## Overview
+## Summary
 
-[Brief description of why this upgrade is needed]
+[Brief description in Chinese - 2-3 sentences]
 
-## Changes
+| 任務 | 預估時間 | 相依項目 |
+|------|----------|----------|
+| 1. Task 1 | 30 分鐘 | - |
+| 2. Task 2 | 1 小時 | 任務 1 |
 
-### Breaking Changes
+---
 
-| Change | Impact | Mitigation |
-|--------|--------|------------|
-| Item 1 | High/Medium/Low | Description |
+## 1. [Section Title]
 
-### New Features
+### 1.1 [Subsection]
 
-- Feature 1
-- Feature 2
+[Content with detailed steps]
 
-### Bug Fixes
+### 目錄結構
 
-- Fix 1
-- Fix 2
+```
+project/
+├── file1.yaml
+├── file2.yaml
+└── config/
+    └── config.yaml
+```
+
+## 2. [Next Section]
+
+[Content]
 
 ## Testing
 
@@ -121,22 +204,14 @@ When you find important information, create new documents in `docs/`:
 ## Rollback Plan
 
 [Steps to rollback if needed]
-
-## Timeline
-
-| Phase | Duration | Status |
-|-------|----------|--------|
-| Analysis | 1 week | Complete |
-| Testing | 1 week | Pending |
-| Deployment | 1 day | Pending |
 ```
 
 ## Writing Style
 
 ### Language
 
-- Use **English** for technical documentation and code references
-- Use **Traditional Chinese** for internal team communication if needed
+- Use **English** for technical terms, code references, and PR titles
+- Use **Traditional Chinese** for summaries, descriptions, and internal documentation
 - When in doubt, default to English for broader accessibility
 
 ### Tone
@@ -148,10 +223,11 @@ When you find important information, create new documents in `docs/`:
 
 ### Formatting
 
-- Use tables for structured data
+- Use tables for structured data (metadata, comparisons, task lists)
 - Use code blocks for terminal commands and configuration
 - Use bullet points for lists
 - Use headers (##, ###) to organize content
+- Use horizontal rules (`---`) to separate major sections
 
 ## Code Examples
 
@@ -185,6 +261,10 @@ When documenting versions, include:
 2. Key changes (features, fixes, breaking changes)
 3. Compatibility notes
 4. Migration steps if needed
+
+For multi-version analysis (e.g., upgrade paths), use the pattern:
+- `upgrade-changelog-v1.79-to-v1.81.md` for changelog analysis
+- `db-schema-migration-v1.79-to-v1.81.md` for database schema changes
 
 ## Review Checklist
 

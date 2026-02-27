@@ -1,7 +1,7 @@
 # Python Development with UV
 
-**Date**: 2026-02-26
-**Purpose**: Instructions for AI agents to use UV for Python development in this project
+- **Date**: 2026-02-26
+- **Purpose**: Instructions for AI agents to use UV for Python development in this project
 
 ## AI Instructions
 

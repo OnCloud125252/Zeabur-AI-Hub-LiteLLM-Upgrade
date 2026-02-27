@@ -1,8 +1,8 @@
 # 資料庫 Schema 遷移分析：v1.79.0 → v1.81.12
 
-**Date**: 2026-02-27
-**Status**: Complete
-**Purpose**: 記錄 LiteLLM v1.79.0 至 v1.81.12 之間的所有 Prisma schema 變更，提供手動 SQL 遷移腳本作為 `prisma db push` 的安全替代方案。
+- **Date**: 2026-02-27
+- **Status**: Complete
+- **Purpose**: 記錄 LiteLLM v1.79.0 至 v1.81.12 之間的所有 Prisma schema 變更，提供手動 SQL 遷移腳本作為 `prisma db push` 的安全替代方案。
 
 ## Summary
 

@@ -1,7 +1,7 @@
 # LiteLLM PR Compatibility Report
 
-**Date**: 2026-02-26
-**Repository**: [BerriAI/litellm](https://github.com/BerriAI/litellm)
+- **Date**: 2026-02-26
+- **Repository**: [BerriAI/litellm](https://github.com/BerriAI/litellm)
 
 ---
 

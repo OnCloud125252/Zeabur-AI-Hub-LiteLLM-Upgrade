@@ -1,10 +1,10 @@
 # Integration Test Report: Gemini thought_signature Fix Verification
 
-**Date:** 2026-02-26
-**Tester:** Automated verification
-**LiteLLM versions:** v1.79.0-stable vs v1.80.11-stable
-**API:** Google AI Studio (API key authentication)
-**Models tested:** `gemini-2.5-flash`, `gemini-3-pro-preview`
+- **Date:** 2026-02-26
+- **Tester:** Automated verification
+- **LiteLLM versions:** v1.79.0-stable vs v1.80.11-stable
+- **API:** Google AI Studio (API key authentication)
+- **Models tested:** `gemini-2.5-flash`, `gemini-3-pro-preview`
 
 ## Test Configuration
 

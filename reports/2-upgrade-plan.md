@@ -1,8 +1,8 @@
 # 升級計劃：LiteLLM v1.79.0-stable → v1.81.12-stable.1
 
-**Date**: 2026-02-27  
-**Target Version**: v1.81.12-stable.1  
-**Status**: Complete
+- **Date**: 2026-02-27
+- **Target Version**: v1.81.12-stable.1
+- **Status**: Complete
 
 ## Overview
 

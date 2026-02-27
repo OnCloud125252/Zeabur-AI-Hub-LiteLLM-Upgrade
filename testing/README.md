@@ -1,7 +1,7 @@
 # LiteLLM Testing Guide
 
-**Date**: 2026-02-27
-**Purpose**: Testing suite for LiteLLM proxy regression and integration tests
+- **Date**: 2026-02-27
+- **Purpose**: Testing suite for LiteLLM proxy regression and integration tests
 
 ## Overview
 
@@ -97,7 +97,7 @@ uv run python test_gemini_signature.py --model gemini-2.5-flash
 
 - **PASS**: Multi-turn conversation completes successfully
 - **FAIL with thought_signature error**: The bug is present
-- **No __thought__ in ID**: Model may not be emitting signatures (check `enable_preview_features`)
+- **No **thought** in ID**: Model may not be emitting signatures (check `enable_preview_features`)
 
 ## Configuration
 

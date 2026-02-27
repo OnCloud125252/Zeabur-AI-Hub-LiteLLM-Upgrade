@@ -1,10 +1,10 @@
 # 第三階段：遠端環境升級驗證計劃
 
-**Date**: 2026-02-27
-**Phase**: Phase 3 - Remote Environment Upgrade Verification
-**Target Version**: v1.81.12-stable.1
-**Environment**: Remote Docker (10.0.1.9)
-**Status**: Planning
+- **Date**: 2026-02-27
+- **Phase**: Phase 3 - Remote Environment Upgrade Verification
+- **Target Version**: v1.81.12-stable.1
+- **Environment**: Remote Docker (10.0.1.9)
+- **Status**: Planning
 
 ## Summary
 
@@ -235,10 +235,12 @@ litellm_settings:
 ### 3.1 遷移策略
 
 **選項 A：自動遷移（簡易）**
+
 - 讓 v1.81.12 自動執行 `prisma db push`
 - 適合：快速驗證、非生產環境
 
 **選項 B：手動遷移（推薦）**
+
 - 執行 SQL 遷移腳本，保留完整控制
 - 適合：生產環境模擬、需要審核每個變更
 
