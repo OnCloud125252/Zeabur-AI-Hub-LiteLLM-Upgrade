@@ -2,7 +2,7 @@
 
 > 機器生成的測試結果封存檔
 
-← [返回文件首頁](../README.md)
+← [返回文件首頁](/README.md)
 
 ---
 
@@ -100,8 +100,8 @@ uv run python test_performance.py --model gemini-2.5-flash
 | thought_signature 修復 | ✅ 於 v1.81.12 驗證通過 |
 | 效能影響 | 在 ±5% 範圍內（無效能衰退） |
 
-完整分析請參閱 [reports/4g-test-report.md](../reports/4g-test-report.md)。
+完整分析請參閱 [reports/4g-test-report.md](/reports/4g-test-report.md)。
 
 ---
 
-*完整文件導覽請參閱 [SUMMARY.md](../SUMMARY.md)。*
+*完整文件導覽請參閱 [SUMMARY.md](/SUMMARY.md)。*

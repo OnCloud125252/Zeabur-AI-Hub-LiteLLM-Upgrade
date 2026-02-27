@@ -11,7 +11,7 @@
 - **用途**：DBA / 運維人員可直接操作的資料庫遷移指南
 - **升級路徑**：v1.79.0-stable → v1.81.12-stable.1
 - **狀態**：完成
-- **資料來源**：[research/db-schema-migration-v1.79-to-v1.81.md](../research/db-schema-migration-v1.79-to-v1.81.md)、[testing/remote/migrations/](../testing/remote/migrations/)
+- **資料來源**：[research/db-schema-migration-v1.79-to-v1.81.md](/research/db-schema-migration-v1.79-to-v1.81.md)、[testing/remote/migrations/](/testing/remote/migrations/)
 
 ---
 
@@ -276,7 +276,7 @@ WHERE tablename = 'LiteLLM_PromptTable'
 
 ## References
 
-- Schema 遷移分析：[research/db-schema-migration-v1.79-to-v1.81.md](../research/db-schema-migration-v1.79-to-v1.81.md)
-- Phase A SQL：[testing/remote/migrations/migration_phase_a.sql](../testing/remote/migrations/migration_phase_a.sql)
-- Phase B SQL：[testing/remote/migrations/migration_phase_b.sql](../testing/remote/migrations/migration_phase_b.sql)
+- Schema 遷移分析：[research/db-schema-migration-v1.79-to-v1.81.md](/research/db-schema-migration-v1.79-to-v1.81.md)
+- Phase A SQL：[testing/remote/migrations/migration_phase_a.sql](/testing/remote/migrations/migration_phase_a.sql)
+- Phase B SQL：[testing/remote/migrations/migration_phase_b.sql](/testing/remote/migrations/migration_phase_b.sql)
 - Phase 3 驗證報告：[reports/3-verification-report.md](3-verification-report.md)

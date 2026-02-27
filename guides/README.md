@@ -2,7 +2,7 @@
 
 > LiteLLM 升級專案的 AI Agent 操作指南
 
-← [返回文件首頁](../README.md)
+← [返回文件首頁](/README.md)
 
 ---
 
@@ -21,17 +21,17 @@
 ### AI Agent 適用：撰寫標準
 
 - **撰寫標準**：請參閱 [documentation-guide.md](documentation-guide.md) 了解範本、命名慣例和風格指南
-- **文件類型**：研究筆記存放於 `../research/`，交付文件存放於 `../reports/`
+- **文件類型**：研究筆記存放於 `/research/`，交付文件存放於 `/reports/`
 
 ### AI Agent 適用：Python 環境
 
 - **Python 環境**：使用 UV（而非 pip/poetry）——請參閱 [python-setup.md](python-setup.md)
-- **測試**：請遵循 [`../testing/local/README.md`](../testing/local/README.md) 的本機測試指南
+- **測試**：請遵循 [`/testing/local/README.md`](/testing/local/README.md) 的本機測試指南
 
 ### AI Agent 適用：遠端伺服器
 
 - **遠端伺服器**：Proxmox VE 位於 `10.0.1.9` ——請參閱 [remote-docker-server.md](remote-docker-server.md)
-- **部署**：請參考 [`../reports/4d-upgrade-steps.md`](../reports/4d-upgrade-steps.md) 的升級步驟
+- **部署**：請參考 [`/reports/4d-upgrade-steps.md`](/reports/4d-upgrade-steps.md) 的升級步驟
 
 ---
 
@@ -65,4 +65,4 @@
 
 ---
 
-*請參閱 [SUMMARY.md](../SUMMARY.md) 以取得完整的文件導覽。*
+*請參閱 [SUMMARY.md](/SUMMARY.md) 以取得完整的文件導覽。*

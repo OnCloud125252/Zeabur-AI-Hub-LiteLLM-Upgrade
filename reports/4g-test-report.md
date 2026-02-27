@@ -276,9 +276,9 @@ v1.79.0 可以安全地在 v1.81.12 schema 上運行。新增的 15 張表和新
 
 ## References
 
-- Phase 1 環境報告：[1-environment-report.md](1-environment-report.md)
-- Phase 3 驗證報告：[3-verification-report.md](3-verification-report.md)
-- 測試輸出目錄：[test-outputs/](test-outputs/)
-- 回歸測試腳本：[../testing/local/test_regression.py](../testing/local/test_regression.py)
-- thought_signature 測試腳本：[../testing/local/test_gemini_signature.py](../testing/local/test_gemini_signature.py)
-- 效能測試腳本：[../testing/local/test_performance.py](../testing/local/test_performance.py)
+- Phase 1 環境報告：[1-environment-report.md](/reports/1-environment-report.md)
+- Phase 3 驗證報告：[3-verification-report.md](/reports/3-verification-report.md)
+- 測試輸出目錄：[test-outputs/](/test-outputs/)
+- 回歸測試腳本：[testing/local/test_regression.py](/testing/local/test_regression.py)
+- thought_signature 測試腳本：[testing/local/test_gemini_signature.py](/testing/local/test_gemini_signature.py)
+- 效能測試腳本：[testing/local/test_performance.py](/testing/local/test_performance.py)

@@ -21,7 +21,6 @@
 |--------|--------|------|
 | 🔴 高 | 3 | 待處理 |
 | 🟡 中 | 3 | 待處理 |
-| 🟢 低 | 3 | 待處理 |
 
 ---
 
@@ -374,34 +373,6 @@ if __name__ == "__main__":
     passed = asyncio.run(run_load_test(base_url, api_key, args.users, args.duration))
     exit(0 if passed else 1)
 ```
-
----
-
-## 🟢 低優先級（可選處理）
-
-### 7. 文件交叉引用可以優化
-
-**問題描述**：部分文件之間的引用使用相對路徑，建議統一格式。
-
-**建議**：
-
-- 在 `CLAUDE.md` 中統一定義文件路徑常數
-- 使用絕對路徑格式：`[文件名](/reports/filename.md)`
-
----
-
-### 8. 時間戳記格式不統一
-
-**問題描述**：部分文件使用不同日期格式。
-
-**建議統一為**：`YYYY-MM-DD`（ISO 8601）
-
-需檢查的文件：
-
-- `reports/1-environment-report.md`
-- `reports/2-upgrade-plan.md`
-- `reports/3-verification-report.md`
-- `reports/4-delivery-report.md`
 
 ---
 

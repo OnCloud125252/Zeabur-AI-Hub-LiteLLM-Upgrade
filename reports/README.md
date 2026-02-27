@@ -2,7 +2,7 @@
 
 > LiteLLM 升級專案的階段交付文件
 
-← [返回文件首頁](../README.md)
+← [返回文件首頁](/README.md)
 
 ---
 
@@ -111,7 +111,7 @@
 
 ## 測試輸出
 
-機器生成的測試結果儲存於 [`../test-outputs/`](../test-outputs/)：
+機器生成的測試結果儲存於 [`/test-outputs/`](/test-outputs/)：
 
 | 檔案 | 說明 |
 |------|-------------|
@@ -125,4 +125,4 @@
 
 ---
 
-*完整的文件導覽請參閱 [SUMMARY.md](../SUMMARY.md)。*
+*完整的文件導覽請參閱 [SUMMARY.md](/SUMMARY.md)。*

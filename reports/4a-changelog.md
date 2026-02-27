@@ -11,7 +11,7 @@
 - **用途**：完整記錄 11 個穩定版本的變更，供升級評估與上線審查使用
 - **升級路徑**：v1.79.0-stable → v1.81.12-stable.1
 - **狀態**：完成
-- **資料來源**：[research/upgrade-changelog-v1.79-to-v1.81.md](../research/upgrade-changelog-v1.79-to-v1.81.md)
+- **資料來源**：[research/upgrade-changelog-v1.79-to-v1.81.md](/research/upgrade-changelog-v1.79-to-v1.81.md)
 
 ---
 
@@ -305,4 +305,4 @@ Zeabur 使用 Python 3.12，無影響。
 - LiteLLM Releases: <https://github.com/BerriAI/litellm/releases>
 - PR #16895: <https://github.com/BerriAI/litellm/pull/16895>
 - PR #18374: <https://github.com/BerriAI/litellm/pull/18374>
-- 完整分析: [research/upgrade-changelog-v1.79-to-v1.81.md](../research/upgrade-changelog-v1.79-to-v1.81.md)
+- 完整分析: [research/upgrade-changelog-v1.79-to-v1.81.md](/research/upgrade-changelog-v1.79-to-v1.81.md)

@@ -11,7 +11,7 @@
 - **用途**：運維人員升級前後的設定檢查清單
 - **升級路徑**：v1.79.0-stable → v1.81.12-stable.1
 - **狀態**：完成
-- **資料來源**：[reports/2-upgrade-plan.md](2-upgrade-plan.md)、[research/upgrade-changelog-v1.79-to-v1.81.md](../research/upgrade-changelog-v1.79-to-v1.81.md)
+- **資料來源**：[reports/2-upgrade-plan.md](/reports/2-upgrade-plan.md)、[research/upgrade-changelog-v1.79-to-v1.81.md](/research/upgrade-changelog-v1.79-to-v1.81.md)
 
 ---
 
@@ -263,5 +263,5 @@ litellm_settings:
 ## References
 
 - 升級計劃設定章節：[reports/2-upgrade-plan.md](2-upgrade-plan.md) 第 3 章
-- 版本變更分析：[research/upgrade-changelog-v1.79-to-v1.81.md](../research/upgrade-changelog-v1.79-to-v1.81.md) 第 6 章
+- 版本變更分析：[research/upgrade-changelog-v1.79-to-v1.81.md](/research/upgrade-changelog-v1.79-to-v1.81.md) 第 6 章
 - Phase 3 驗證報告：[reports/3-verification-report.md](3-verification-report.md)

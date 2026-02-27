@@ -2,7 +2,7 @@
 
 > LiteLLM 升級的研究與分析文件
 
-← [返回文件首頁](../README.md)
+← [返回文件首頁](/README.md)
 
 ---
 
@@ -70,7 +70,7 @@ Gemini thought signature 問題的初始修復分析：
 
 ## 研究方法
 
-本目錄中的文件遵循 [guides/documentation-guide.md](../guides/documentation-guide.md) 中定義的研究模式：
+本目錄中的文件遵循 [guides/documentation-guide.md](/guides/documentation-guide.md) 中定義的研究模式：
 
 1. **版本分析**：發布日期、關鍵變更、相容性說明
 2. **PR 分析**：概覽、問題、解決方案、變更表格、參考資料
@@ -78,4 +78,4 @@ Gemini thought signature 問題的初始修復分析：
 
 ---
 
-*請參閱 [SUMMARY.md](../SUMMARY.md) 以取得完整的文件導覽。*
+*請參閱 [SUMMARY.md](/SUMMARY.md) 以取得完整的文件導覽。*

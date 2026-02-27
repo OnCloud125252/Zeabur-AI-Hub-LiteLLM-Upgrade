@@ -373,10 +373,10 @@ curl -X POST http://localhost:4000/v1/chat/completions \
 
 ## References
 
-- 版本差異分析：[research/upgrade-changelog-v1.79-to-v1.81.md](../research/upgrade-changelog-v1.79-to-v1.81.md)
-- DB Schema 遷移分析：[research/db-schema-migration-v1.79-to-v1.81.md](../research/db-schema-migration-v1.79-to-v1.81.md)
-- Phase 1 報告：[1-environment-report.md](1-environment-report.md)
-- Phase 3 驗證報告：[3-verification-report.md](3-verification-report.md)
-- 迴歸測試：[../testing/local/test_regression.py](../testing/local/test_regression.py)
-- thought_signature 測試：[../testing/local/test_gemini_signature.py](../testing/local/test_gemini_signature.py)
+- 版本差異分析：[research/upgrade-changelog-v1.79-to-v1.81.md](/research/upgrade-changelog-v1.79-to-v1.81.md)
+- DB Schema 遷移分析：[research/db-schema-migration-v1.79-to-v1.81.md](/research/db-schema-migration-v1.79-to-v1.81.md)
+- Phase 1 報告：[1-environment-report.md](/reports/1-environment-report.md)
+- Phase 3 驗證報告：[3-verification-report.md](/reports/3-verification-report.md)
+- 迴歸測試：[testing/local/test_regression.py](/testing/local/test_regression.py)
+- thought_signature 測試：[testing/local/test_gemini_signature.py](/testing/local/test_gemini_signature.py)
 - LiteLLM Releases：<https://github.com/BerriAI/litellm/releases>

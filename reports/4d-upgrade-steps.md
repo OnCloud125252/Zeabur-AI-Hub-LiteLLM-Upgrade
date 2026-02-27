@@ -11,7 +11,7 @@
 - **用途**：運維人員可直接依循的升級操作手冊
 - **升級路徑**：v1.79.0-stable → v1.81.12-stable.1
 - **狀態**：完成
-- **資料來源**：[reports/2-upgrade-plan.md](2-upgrade-plan.md)
+- **資料來源**：[reports/2-upgrade-plan.md](/reports/2-upgrade-plan.md)
 
 ---
 

@@ -2,7 +2,7 @@
 
 > 遠端 Docker 部署測試環境
 
-← [返回測試](../README.md)
+← [返回測試](/testing/README.md)
 
 ---
 
@@ -21,7 +21,7 @@
 | Docker | 29.2.1 |
 | Docker Compose | v5.1.0 |
 
-連線詳細資訊請參閱 [guides/remote-docker-server.md](../../guides/remote-docker-server.md)。
+連線詳細資訊請參閱 [guides/remote-docker-server.md](/guides/remote-docker-server.md)。
 
 ## 目錄結構
 
@@ -106,7 +106,7 @@ ssh root@10.0.1.9 "cd /opt/litellm && docker compose -f docker-compose.v1.79.0.y
 | `migration_phase_a.sql` | 從 v1.79.0 到 v1.80.11 的結構變更 |
 | `migration_phase_b.sql` | 從 v1.80.11 到 v1.81.12 的結構變更 |
 
-詳細說明請參閱 [reports/4b-db-migration-guide.md](../../reports/4b-db-migration-guide.md)。
+詳細說明請參閱 [reports/4b-db-migration-guide.md](/reports/4b-db-migration-guide.md)。
 
 ## 驗證
 
@@ -137,4 +137,4 @@ curl -X POST http://10.0.1.9:4000/v1/chat/completions \
 
 ---
 
-*Phase 3 驗證結果請參閱 [reports/3-verification-report.md](../../reports/3-verification-report.md)。*
+*Phase 3 驗證結果請參閱 [reports/3-verification-report.md](/reports/3-verification-report.md)。*

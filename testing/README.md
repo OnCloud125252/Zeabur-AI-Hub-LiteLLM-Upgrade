@@ -2,7 +2,7 @@
 
 > LiteLLM 升級的測試文件與環境
 
-← [返回文件首頁](../README.md)
+← [返回文件首頁](/README.md)
 
 ---
 
@@ -40,7 +40,7 @@
 
 ## 測試結果
 
-機器產生的測試輸出儲存於 [`../test-outputs/`](../test-outputs/)：
+機器產生的測試輸出儲存於 [`/test-outputs/`](/test-outputs/)：
 
 | 檔案 | 說明 |
 |------|------|
@@ -88,4 +88,4 @@ docker compose ps
 
 ---
 
-*完整的文件導覽請參閱 [SUMMARY.md](../SUMMARY.md)。*
+*完整的文件導覽請參閱 [SUMMARY.md](/SUMMARY.md)。*
