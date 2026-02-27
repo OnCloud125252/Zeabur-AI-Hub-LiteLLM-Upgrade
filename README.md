@@ -4,6 +4,21 @@
 
 ---
 
+## TL;DR
+
+| | |
+|:---|:---|
+| **問題** | Gemini 長對話出現 `thought_signature` 503 錯誤 |
+| **解決方案** | 升級 LiteLLM v1.79.0 → v1.81.12-stable.1 |
+| **關鍵修復** | PR #16895 + #18374 — tool call ID 儲存 thought 簽名 |
+| **測試結果** | 28/28 迴歸測試通過，效能無迴歸 (±5%) |
+| **部署方式** | 藍綠部署，預估停機 < 30 秒 |
+| **回滾** | 已驗證 v1.79.0 可在遷移後資料庫執行 |
+
+**立即行動**：運維人員請參閱 [reports/4d-upgrade-steps.md](reports/4d-upgrade-steps.md) 執行升級。
+
+---
+
 ## 概覽
 
 本儲存庫記錄 Zeabur AI Hub 底層 LiteLLM 基礎設施的完整升級過程。此次升級解決了關鍵的 Gemini `thought_signature` 503 錯誤，同時納入 4 個月的效能改善、安全修補與新功能。

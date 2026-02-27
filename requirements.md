@@ -4,7 +4,7 @@ Title: Zeabur AI Hub LiteLLM Upgrade
 
 > Original Document: [Zeabur AI Hub LiteLLM Upgrade](https://zeabur.notion.site/Zeabur-AI-Hub-LiteLLM-Upgrade-307a221c948e80e5bd6bd917216619b2)
 
-# 前情提要
+## 前情提要
 
 Zeabur AI Hub 是 Zeabur 平台上的 AI 模型聚合服務，底層基於 LiteLLM 建構，為使用者提供統一的 API 介面來存取多家 LLM 供應商的模型。LiteLLM 作為開源專案由 BerriAI 維護，迭代頻率極高，新版本會持續修復效能問題、安全漏洞，並改善既有功能特性。
 
@@ -17,7 +17,7 @@ Zeabur AI Hub 是 Zeabur 平台上的 AI 模型聚合服務，底層基於 LiteL
 
 關於 LiteLLM 的詳細介紹，可以參考 [LiteLLM 官方文件](https://docs.litellm.ai/)。
 
-# 需求說明
+## 需求說明
 
 本次任務的核心目標是：將 LiteLLM 從 v1.79.0-stable 升級到最新穩定版本，確保 downtime 盡量少，升級後所有功能和資料都正常。
 
