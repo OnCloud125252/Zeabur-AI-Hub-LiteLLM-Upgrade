@@ -52,7 +52,6 @@
 |------|------|
 | [reports/](reports/README.md) | 交付文件（升級步驟、回滾、遷移、測試）|
 | [research/](research/README.md) | 研究分析（PR 變更、版本差異、資料庫遷移）|
-| [guides/](guides/README.md) | 操作指南（Python、Docker、文件標準）|
 | [testing/](testing/README.md) | 測試環境與腳本 |
 
 完整導覽請參閱 [SUMMARY.md](SUMMARY.md)。

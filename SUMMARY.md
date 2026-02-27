@@ -12,7 +12,6 @@
 
 | 文件 | 說明 |
 |----------|-------------|
-| [指南索引](guides/README.md) | 所有操作指南 |
 | [文件撰寫指南](guides/documentation-guide.md) | 建立文件的標準規範 |
 | [Python 環境設定](guides/python-setup.md) | 使用 UV 的 Python 開發環境 |
 | [遠端 Docker 伺服器](guides/remote-docker-server.md) | 遠端環境使用說明 |

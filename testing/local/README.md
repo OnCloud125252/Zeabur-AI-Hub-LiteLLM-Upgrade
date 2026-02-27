@@ -1,6 +1,8 @@
-# LiteLLM 測試指南
+# LiteLLM 本機測試指南
 
 > LiteLLM proxy 迴歸測試與整合測試的本機測試指南
+>
+> 本目錄包含用於驗證 LiteLLM proxy 行為的自動化測試套件，用於在升級前建立基準線並在升級後驗證修復結果。
 
 ← [返回測試](/testing/README.md)
 
@@ -31,7 +33,7 @@ uv run python test_regression.py --model gemini-2.5-flash
 
 ### 1. 迴歸測試（`test_regression.py`）
 
-涵蓋 proxy 核心功能的完整測試套件。
+涵蓋 proxy 核心功能的完整測試套件，共 28 項測試。
 
 **測試覆蓋範圍**：
 
@@ -99,11 +101,13 @@ uv run python test_regression.py --port 4001 --model gemini-2.5-pro
 uv run python test_gemini_signature.py --model gemini-2.5-flash
 ```
 
-**注意事項**：
+**判讀結果**：
 
-- **通過**：多輪對話成功完成
-- **失敗（含 thought_signature 錯誤）**：bug 仍存在
-- **ID 中無 `__thought__`**：模型可能未發出簽章（請確認 `enable_preview_features` 設定）
+| 結果 | 意義 |
+|------|------|
+| 通過 | 多輪對話成功完成 |
+| 失敗（含 thought_signature 錯誤） | bug 仍存在 |
+| ID 中無 `__thought__` | 模型可能未發出簽章（請確認 `enable_preview_features` 設定） |
 
 ## 設定
 
@@ -132,12 +136,13 @@ litellm_settings:
 ## 目錄結構
 
 ```
-testing/
+testing/local/
 ├── README.md                    # 本檔案
 ├── config.yaml                  # LiteLLM proxy 共用設定
 ├── .env                         # API 金鑰（已列入 gitignore）
-├── test_regression.py           # 核心迴歸測試套件
+├── test_regression.py           # 核心迴歸測試套件（28 項測試）
 ├── test_gemini_signature.py     # 思考簽章整合測試
+├── test_performance.py         # 效能基準測試
 ├── results/                     # 測試結果報告
 │   ├── integration-test.md
 │   ├── v1.79.0-code-check.md
@@ -163,6 +168,20 @@ uv run python test_regression.py > results/baseline-v1.79.0.txt
 # 4. 執行相同測試，比對結果
 ```
 
+### 升級後驗證
+
+```bash
+# 1. 啟動新版本（如 v1.81.12）
+cd litellm-v1.81.12 && source .venv/bin/activate
+litellm --config ../config.yaml --port 4000
+
+# 2. 執行迴歸測試
+uv run python test_regression.py > results/regression-v1.81.12.txt
+
+# 3. 執行簽章測試
+uv run python test_gemini_signature.py > results/signature-v1.81.12.txt
+```
+
 ### 功能專項測試
 
 ```bash
@@ -171,6 +190,9 @@ uv run python test_regression.py --model gemini-2.5-flash 2>&1 | grep -A2 "Tool\
 
 # 僅測試思考簽章修復
 uv run python test_gemini_signature.py --model gemini-2.5-flash
+
+# 執行效能基準測試
+uv run python test_performance.py --model gemini-2.5-flash
 ```
 
 ## 故障排除
@@ -185,6 +207,6 @@ uv run python test_gemini_signature.py --model gemini-2.5-flash
 
 ## 參考資料
 
-- [資料庫遷移指南](/research/db-schema-migration-v1.79-to-v1.81.md)
-- [升級計劃](/reports/2-upgrade-plan.md)
-- [使用 UV 進行 Python 開發](/guides/python-setup.md)
+- [資料庫遷移指南](../../research/db-schema-migration-v1.79-to-v1.81.md)
+- [升級計劃](../../reports/2-upgrade-plan.md)
+- [使用 UV 進行 Python 開發](../../guides/python-setup.md)
