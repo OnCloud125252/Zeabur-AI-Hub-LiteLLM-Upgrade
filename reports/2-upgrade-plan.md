@@ -369,6 +369,6 @@ curl -X POST http://localhost:4000/v1/chat/completions \
 - 版本差異分析：`reports/upgrade-changelog-v1.79-to-v1.81.md`
 - DB Schema 遷移分析：`docs/db-schema-migration-v1.79-to-v1.81.md`
 - Phase 1 報告：`reports/phase1-report.md`
-- 迴歸測試：`testing/test_regression.py`
-- thought_signature 測試：`testing/test_gemini_thought_signature.py`
+- 迴歸測試：`testing/local/test_regression.py`
+- thought_signature 測試：`testing/local/test_gemini_thought_signature.py`
 - LiteLLM Releases：<https://github.com/BerriAI/litellm/releases>

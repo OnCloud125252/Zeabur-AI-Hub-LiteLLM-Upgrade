@@ -34,7 +34,7 @@
 
 ### 驗證方式
 
-1. 使用 `uv` 在 `testing/litellm-v1.79.0/` 建立獨立 Python 虛擬環境
+1. 使用 `uv` 在 `testing/local/litellm-v1.79.0/` 建立獨立 Python 虛擬環境
 2. 安裝 LiteLLM 及其 proxy 相依套件
 3. 使用模擬 config.yaml 啟動 proxy，確認：
    - `/health/liveliness` 回傳 `"I'm alive!"`
@@ -305,7 +305,7 @@ Schema 位於：`litellm/proxy/schema.prisma`
 
 ### 4.1 測試設計
 
-測試腳本：`testing/test_regression.py`
+測試腳本：`testing/local/test_regression.py`
 
 覆蓋以下核心功能路徑：
 
@@ -366,12 +366,12 @@ Schema 位於：`litellm/proxy/schema.prisma`
 
 ```bash
 # 啟動 proxy
-cd testing/litellm-v1.79.0 && source .venv/bin/activate
+cd testing/local/litellm-v1.79.0 && source .venv/bin/activate
 source ../.env && litellm --config ../config.yaml --port 4000
 
 # 執行迴歸測試（另一個終端機）
-cd testing/litellm-v1.79.0 && source .venv/bin/activate
-python testing/test_regression.py --port 4000
+cd testing/local/litellm-v1.79.0 && source .venv/bin/activate
+python testing/local/test_regression.py --port 4000
 ```
 
 ---
@@ -433,15 +433,15 @@ v1.80.11-stable 包含完整且功能正常的 thought_signature 實作。升級
 
 | 檔案 | 用途 |
 |------|------|
-| `testing/litellm-v1.79.0/` | v1.79.0-stable 原始碼（含 venv） |
-| `testing/litellm-v1.80.11/` | v1.80.11-stable 原始碼（含 venv） |
-| `testing/config.yaml` | 共用 Proxy 設定（3 個 Gemini 模型） |
-| `testing/.env` | 環境變數（API 金鑰） |
-| `testing/test_regression.py` | 28 項迴歸測試腳本 |
-| `testing/test_gemini_thought_signature.py` | thought_signature 整合測試腳本 |
-| `testing/results/thought-signature-v1.79.0-code-check.md` | v1.79.0 thought_signature 程式碼審計 |
-| `testing/results/thought-signature-v1.80.11-code-check.md` | v1.80.11 thought_signature 程式碼審計 |
-| `testing/results/thought-signature-integration-test.md` | thought_signature 整合測試完整報告 |
+| `testing/local/litellm-v1.79.0/` | v1.79.0-stable 原始碼（含 venv） |
+| `testing/local/litellm-v1.80.11/` | v1.80.11-stable 原始碼（含 venv） |
+| `testing/local/config.yaml` | 共用 Proxy 設定（3 個 Gemini 模型） |
+| `testing/local/.env` | 環境變數（API 金鑰） |
+| `testing/local/test_regression.py` | 28 項迴歸測試腳本 |
+| `testing/local/test_gemini_thought_signature.py` | thought_signature 整合測試腳本 |
+| `testing/local/results/thought-signature-v1.79.0-code-check.md` | v1.79.0 thought_signature 程式碼審計 |
+| `testing/local/results/thought-signature-v1.80.11-code-check.md` | v1.80.11 thought_signature 程式碼審計 |
+| `testing/local/results/thought-signature-integration-test.md` | thought_signature 整合測試完整報告 |
 | `phase1-report.md` | 本報告（第一階段繁體中文完整報告） |
 
 ---
@@ -453,5 +453,5 @@ v1.80.11-stable 包含完整且功能正常的 thought_signature 實作。升級
 - PR #16895（thought_signature 初始實作）：<https://github.com/BerriAI/litellm/pull/16895>
 - PR #18374（thought_signature 正式化）：<https://github.com/BerriAI/litellm/pull/18374>
 - Gemini Thought Signatures 文件：<https://ai.google.dev/gemini-api/docs/thought-signatures>
-- Schema 檔案：`testing/litellm-v1.79.0/litellm/proxy/schema.prisma`
-- Docker Compose：`testing/litellm-v1.79.0/docker-compose.yml`
+- Schema 檔案：`testing/local/litellm-v1.79.0/litellm/proxy/schema.prisma`
+- Docker Compose：`testing/local/litellm-v1.79.0/docker-compose.yml`

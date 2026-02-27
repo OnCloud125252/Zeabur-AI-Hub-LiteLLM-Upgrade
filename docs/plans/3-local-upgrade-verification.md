@@ -4,7 +4,7 @@
 - **Phase**: Phase 3 - Remote Environment Upgrade Verification
 - **Target Version**: v1.81.12-stable.1
 - **Environment**: Remote Docker (10.0.1.9)
-- **Status**: Planning
+- **Status**: Completed (2026-02-27)
 
 ## Summary
 
@@ -291,13 +291,13 @@ sleep 60
 ssh root@10.0.1.9 "curl http://localhost:4000/health/liveliness"
 
 # 3. 執行迴歸測試（本地端執行測試，連線遠端 API）
-python testing/test_regression.py --host 10.0.1.9 --port 4000 --output reports/baseline-v1.79.0.json
+python testing/local/test_regression.py --host 10.0.1.9 --port 4000 --output reports/baseline-v1.79.0.json
 
 # 4. 執行 thought_signature 測試（預期會顯示無簽章）
-python testing/test_gemini_signature.py --host 10.0.1.9 --port 4000 --output reports/signature-v1.79.0.json
+python testing/local/test_gemini_signature.py --host 10.0.1.9 --port 4000 --output reports/signature-v1.79.0.json
 
 # 5. 記錄效能基準
-python testing/test_performance.py --host 10.0.1.9 --port 4000 --output reports/perf-v1.79.0.json
+python testing/local/test_performance.py --host 10.0.1.9 --port 4000 --output reports/perf-v1.79.0.json
 ```
 
 ### 4.2 v1.81.12 升級後測試
@@ -319,13 +319,13 @@ sleep 60
 ssh root@10.0.1.9 "curl http://localhost:4000/health/liveliness"
 
 # 5. 執行迴歸測試（本地端執行測試，連線遠端 API）
-python testing/test_regression.py --host 10.0.1.9 --port 4000 --output reports/regression-v1.81.12.json
+python testing/local/test_regression.py --host 10.0.1.9 --port 4000 --output reports/regression-v1.81.12.json
 
 # 6. 執行 thought_signature 測試（預期顯示簽章存在）
-python testing/test_gemini_signature.py --host 10.0.1.9 --port 4000 --output reports/signature-v1.81.12.json
+python testing/local/test_gemini_signature.py --host 10.0.1.9 --port 4000 --output reports/signature-v1.81.12.json
 
 # 7. 記錄效能數據
-python testing/test_performance.py --host 10.0.1.9 --port 4000 --output reports/perf-v1.81.12.json
+python testing/local/test_performance.py --host 10.0.1.9 --port 4000 --output reports/perf-v1.81.12.json
 ```
 
 ### 4.3 測試檢查清單
@@ -390,7 +390,7 @@ ssh root@10.0.1.9 "cd ~/litellm-upgrade-test && docker compose -f docker-compose
 
 # 3. 驗證功能正常
 ssh root@10.0.1.9 "curl http://localhost:4000/health/liveliness"
-python testing/test_regression.py --host 10.0.1.9 --port 4000
+python testing/local/test_regression.py --host 10.0.1.9 --port 4000
 
 # 4. 確認新增欄位不影響舊版本
 ```
@@ -461,6 +461,6 @@ python testing/test_regression.py --host 10.0.1.9 --port 4000
 - Phase 1 Report: `reports/1-upgrade-report.md`
 - Phase 2 Upgrade Plan: `reports/2-upgrade-plan.md`
 - Database Migration SQL: `docs/research/db-schema-migration-v1.79-to-v1.81.md`
-- Regression Tests: `testing/test_regression.py`
-- thought_signature Tests: `testing/test_gemini_signature.py`
+- Regression Tests: `testing/local/test_regression.py`
+- thought_signature Tests: `testing/local/test_gemini_signature.py`
 - Remote Docker Server: `docs/remote-docker-server.md`

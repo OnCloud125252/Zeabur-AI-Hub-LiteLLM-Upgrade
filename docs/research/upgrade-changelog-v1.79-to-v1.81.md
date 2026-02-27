@@ -347,7 +347,7 @@
 
 ### 6.3 現有設定相容性
 
-我們的 `testing/config.yaml` 已驗證 **完全相容** v1.81.12：
+我們的 `testing/local/config.yaml` 已驗證 **完全相容** v1.81.12：
 
 - `model_list`：`gemini/` 前綴、`os.environ/` 語法均支援
 - `general_settings.master_key`：解析方式不變
