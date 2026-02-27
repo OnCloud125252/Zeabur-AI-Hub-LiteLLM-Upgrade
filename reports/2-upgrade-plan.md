@@ -359,7 +359,7 @@ curl -X POST http://localhost:4000/v1/chat/completions \
 |------|----------|------|
 | Phase 1：環境準備與基準線 | - | ✅ 完成 |
 | Phase 2：版本差異分析與升級計劃 | - | ✅ 完成（本文件） |
-| Phase 3：測試環境升級與驗證 | 1-2 天 | [待執行](docs/plans/3-local-upgrade-verification.md) |
+| Phase 3：測試環境升級與驗證 | 1-2 天 | ✅ 完成（[驗證報告](3-verification-report.md)） |
 | Phase 4：生產環境升級 | 半天 | 待排程 |
 
 ---

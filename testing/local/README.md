@@ -181,4 +181,4 @@ uv run python test_gemini_signature.py --model gemini-2.5-flash
 
 - [Database Migration Guide](../docs/research/db-schema-migration-v1.79-to-v1.81.md)
 - [Upgrade Plan](../reports/upgrade-plan-2026-02.md)
-- [Python Setup with UV](../docs/python-setup.md)
+- [Python Setup with UV](../../docs/guides/python-setup.md)
