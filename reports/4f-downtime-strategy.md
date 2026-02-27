@@ -1,5 +1,11 @@
 # 停機策略與 Downtime 預估
 
+> Phase 4f - Downtime minimization strategies and estimates
+
+← [Back to Reports](README.md)
+
+---
+
 - **日期**：2026-02-27
 - **階段**：Phase 4 Delivery
 - **用途**：停機時間預估與最佳化策略

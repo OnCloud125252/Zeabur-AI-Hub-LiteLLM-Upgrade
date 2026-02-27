@@ -1,5 +1,11 @@
 # 回滾方案
 
+> Phase 4e - Emergency rollback procedures
+
+← [Back to Reports](README.md)
+
+---
+
 - **日期**：2026-02-27
 - **階段**：Phase 4 Delivery
 - **用途**：緊急回滾操作手冊

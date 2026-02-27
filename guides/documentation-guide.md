@@ -1,18 +1,20 @@
 # Documentation Writing Guide
 
-Guidelines for creating and organizing documents in this project.
+> Guidelines for creating and organizing documents in this project
+
+← [Back to Guides](README.md)
 
 ## Document Locations
 
-When you find important information, create new documents in `docs/`:
+When you find important information, create new documents in the appropriate top-level directory:
 
 | Document Type | Location | When to Create |
 |---------------|----------|----------------|
-| Research notes | `docs/research/` | When investigating specific PRs, issues, or features |
-| Implementation plans | `docs/plans/` | When planning phased implementation or verification steps |
-| Version analysis | `docs/research/` | When analyzing version changes, breaking changes |
+| Research notes | `research/` | When investigating specific PRs, issues, or features |
+| Implementation plans | `research/` | When planning phased implementation or verification steps |
+| Version analysis | `research/` | When analyzing version changes, breaking changes |
 | Findings/Reports | `reports/` | When delivering conclusions or recommendations |
-| How-to guides | `docs/` | When explaining how to accomplish specific tasks |
+| How-to guides | `guides/` | When explaining how to accomplish specific tasks |
 
 ## Naming Conventions
 

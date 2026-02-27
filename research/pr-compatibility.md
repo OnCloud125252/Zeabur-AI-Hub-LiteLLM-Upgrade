@@ -1,5 +1,11 @@
 # LiteLLM PR 相容性報告
 
+> PR compatibility matrix for thought signature fixes
+
+← [Back to Research](README.md)
+
+---
+
 - **日期**：2026-02-26
 - **儲存庫**：[BerriAI/litellm](https://github.com/BerriAI/litellm)
 

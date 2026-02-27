@@ -1,5 +1,11 @@
 # 升級步驟：Step-by-Step 操作手冊
 
+> Phase 4d - Step-by-step upgrade manual for operations
+
+← [Back to Reports](README.md)
+
+---
+
 - **日期**：2026-02-27
 - **階段**：Phase 4 Delivery
 - **用途**：運維人員可直接依循的升級操作手冊

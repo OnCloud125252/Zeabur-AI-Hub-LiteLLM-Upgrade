@@ -1,5 +1,11 @@
 # LiteLLM 測試指南
 
+> Local testing guide for LiteLLM proxy regression and integration tests
+
+← [Back to Testing](../README.md)
+
+---
+
 - **日期**：2026-02-27
 - **用途**：LiteLLM proxy 迴歸測試與整合測試套件
 
@@ -179,6 +185,6 @@ uv run python test_gemini_signature.py --model gemini-2.5-flash
 
 ## 參考資料
 
-- [資料庫遷移指南](../docs/research/db-schema-migration-v1.79-to-v1.81.md)
-- [升級計劃](../reports/2-upgrade-plan.md)
-- [使用 UV 進行 Python 開發](../docs/guides/python-setup.md)
+- [資料庫遷移指南](../../research/db-schema-migration-v1.79-to-v1.81.md)
+- [升級計劃](../../reports/2-upgrade-plan.md)
+- [使用 UV 進行 Python 開發](../../guides/python-setup.md)

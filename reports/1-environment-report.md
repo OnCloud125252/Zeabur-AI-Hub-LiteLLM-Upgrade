@@ -1,5 +1,11 @@
 # 環境準備與舊版本運行驗證
 
+> Phase 1: Environment Preparation and Baseline Documentation
+
+← [Back to Reports](README.md)
+
+---
+
 - **日期**：2026-02-26
 - **階段**：Phase 1 - Environment Preparation
 - **用途**：記錄 LiteLLM v1.79.0-stable 的完整基準線——設定、功能清單、迴歸測試結果——作為升級驗證的參考基準

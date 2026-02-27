@@ -1,5 +1,11 @@
 # 遠端環境升級驗證報告
 
+> Phase 3: Remote Environment Upgrade Verification
+
+← [Back to Reports](README.md)
+
+---
+
 - **日期**：2026-02-27
 - **階段**：Phase 3 - Remote Environment Upgrade Verification
 - **升級路徑**：v1.79.0-stable → v1.81.12-stable.1
@@ -266,16 +272,16 @@ ssh root@10.0.1.9 "docker exec litellm-upgrade-test-db-1 psql -U llmproxy -d lit
 ```bash
 # v1.79.0 基準線測試
 ssh root@10.0.1.9 "cd ~/litellm-upgrade-test && docker compose -f docker-compose.base.yml -f docker-compose.v1.79.0.yml up -d"
-python testing/local/test_regression.py --host 10.0.1.9 --port 4000 --output reports/test-outputs/baseline-v1.79.0.json
-python testing/local/test_gemini_signature.py --host 10.0.1.9 --port 4000 --output reports/test-outputs/signature-v1.79.0.json
-python testing/local/test_performance.py --host 10.0.1.9 --port 4000 --output reports/test-outputs/perf-v1.79.0.json
+python testing/local/test_regression.py --host 10.0.1.9 --port 4000 --output test-outputs/baseline-v1.79.0.json
+python testing/local/test_gemini_signature.py --host 10.0.1.9 --port 4000 --output test-outputs/signature-v1.79.0.json
+python testing/local/test_performance.py --host 10.0.1.9 --port 4000 --output test-outputs/perf-v1.79.0.json
 
 # v1.81.12 升級後測試
 ssh root@10.0.1.9 "cd ~/litellm-upgrade-test && docker compose -f docker-compose.v1.79.0.yml stop litellm"
 ssh root@10.0.1.9 "cd ~/litellm-upgrade-test && docker compose -f docker-compose.base.yml -f docker-compose.v1.81.12.yml up -d"
-python testing/local/test_regression.py --host 10.0.1.9 --port 4000 --output reports/test-outputs/regression-v1.81.12.json
-python testing/local/test_gemini_signature.py --host 10.0.1.9 --port 4000 --output reports/test-outputs/signature-v1.81.12.json
-python testing/local/test_performance.py --host 10.0.1.9 --port 4000 --output reports/test-outputs/perf-v1.81.12.json
+python testing/local/test_regression.py --host 10.0.1.9 --port 4000 --output test-outputs/regression-v1.81.12.json
+python testing/local/test_gemini_signature.py --host 10.0.1.9 --port 4000 --output test-outputs/signature-v1.81.12.json
+python testing/local/test_performance.py --host 10.0.1.9 --port 4000 --output test-outputs/perf-v1.81.12.json
 ```
 
 ### 回歸測試（28 項測試）
@@ -457,13 +463,13 @@ python testing/local/test_regression.py --host 10.0.1.9 --port 4000
 
 | 檔案 | 說明 |
 |------|-------------|
-| `reports/test-outputs/baseline-v1.79.0.txt` | v1.79.0 回歸基準線 |
-| `reports/test-outputs/signature-v1.79.0.txt` | v1.79.0 thought_signature 基準線 |
-| `reports/test-outputs/regression-v1.81.12.txt` | v1.81.12 回歸測試結果 |
-| `reports/test-outputs/signature-v1.81.12.txt` | v1.81.12 thought_signature 驗證 |
-| `reports/test-outputs/rollback-v1.79.0.txt` | 回滾回歸測試結果 |
-| `reports/test-outputs/perf-v1.79.0.json` | v1.79.0 效能基準線 |
-| `reports/test-outputs/perf-v1.81.12.json` | v1.81.12 效能數據 |
+| `test-outputs/baseline-v1.79.0.txt` | v1.79.0 回歸基準線 |
+| `test-outputs/signature-v1.79.0.txt` | v1.79.0 thought_signature 基準線 |
+| `test-outputs/regression-v1.81.12.txt` | v1.81.12 回歸測試結果 |
+| `test-outputs/signature-v1.81.12.txt` | v1.81.12 thought_signature 驗證 |
+| `test-outputs/rollback-v1.79.0.txt` | 回滾回歸測試結果 |
+| `test-outputs/perf-v1.79.0.json` | v1.79.0 效能基準線 |
+| `test-outputs/perf-v1.81.12.json` | v1.81.12 效能數據 |
 
 ---
 
@@ -488,7 +494,7 @@ python testing/local/test_regression.py --host 10.0.1.9 --port 4000
 
 - Phase 1 Report: `reports/1-environment-report.md`
 - Phase 2 Upgrade Plan: `reports/2-upgrade-plan.md`
-- Database Migration SQL: `docs/research/db-schema-migration-v1.79-to-v1.81.md`
+- Database Migration SQL: `research/db-schema-migration-v1.79-to-v1.81.md`
 - Regression Tests: `testing/local/test_regression.py`
 - thought_signature Tests: `testing/local/test_gemini_signature.py`
 - Performance Tests: `testing/local/test_performance.py`

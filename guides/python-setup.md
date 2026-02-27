@@ -1,5 +1,11 @@
 # Python Development with UV
 
+> UV-based Python development instructions
+
+← [Back to Guides](README.md)
+
+---
+
 - **Date**: 2026-02-26
 - **Purpose**: Instructions for AI agents to use UV for Python development in this project
 

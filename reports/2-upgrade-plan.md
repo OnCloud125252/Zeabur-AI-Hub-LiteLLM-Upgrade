@@ -1,5 +1,11 @@
 # 升級計劃：LiteLLM v1.79.0-stable → v1.81.12-stable.1
 
+> Phase 2: Upgrade Planning and Strategy
+
+← [Back to Reports](README.md)
+
+---
+
 - **日期**：2026-02-27
 - **階段**：Phase 2 - Upgrade Planning
 - **用途**：詳細說明 LiteLLM 升級的完整流程、風險評估與驗證計劃
@@ -367,8 +373,8 @@ curl -X POST http://localhost:4000/v1/chat/completions \
 
 ## References
 
-- 版本差異分析：[docs/research/upgrade-changelog-v1.79-to-v1.81.md](../docs/research/upgrade-changelog-v1.79-to-v1.81.md)
-- DB Schema 遷移分析：[docs/research/db-schema-migration-v1.79-to-v1.81.md](../docs/research/db-schema-migration-v1.79-to-v1.81.md)
+- 版本差異分析：[research/upgrade-changelog-v1.79-to-v1.81.md](../research/upgrade-changelog-v1.79-to-v1.81.md)
+- DB Schema 遷移分析：[research/db-schema-migration-v1.79-to-v1.81.md](../research/db-schema-migration-v1.79-to-v1.81.md)
 - Phase 1 報告：[1-environment-report.md](1-environment-report.md)
 - Phase 3 驗證報告：[3-verification-report.md](3-verification-report.md)
 - 迴歸測試：[../testing/local/test_regression.py](../testing/local/test_regression.py)

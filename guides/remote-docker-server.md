@@ -1,5 +1,11 @@
 # Remote Docker Server Info
 
+> Connection details and usage for the remote Docker environment
+
+← [Back to Guides](README.md)
+
+---
+
 ## System Details
 
 | Property | Value |
