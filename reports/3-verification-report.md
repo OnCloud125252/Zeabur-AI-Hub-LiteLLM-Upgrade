@@ -1,4 +1,4 @@
-# 第三階段：遠端環境升級驗證報告
+# 遠端環境升級驗證報告
 
 - **日期**：2026-02-27
 - **階段**：Phase 3 - Remote Environment Upgrade Verification
@@ -196,6 +196,7 @@ litellm_settings:
 驗證過程中發現並修復了兩個配置問題：
 
 1. **配置文件路徑**：Docker 映像的預設 CMD（`--port 4000`）不包含 `--config /app/config.yaml`。必須在 docker-compose 中新增 `command` 指令：
+
    ```yaml
    command: ["--config", "/app/config.yaml", "--port", "4000"]
    ```
@@ -355,11 +356,13 @@ curl -X POST http://10.0.1.9:4000/v1/chat/completions \
 | 多輪含工具結果 | 通過 | 通過 |
 
 **v1.79.0 工具呼叫 ID**（簽章已移除）：
+
 ```
 call_70c754b500124dd59dc5bac483f7
 ```
 
 **v1.81.12 工具呼叫 ID**（簽章已保留）：
+
 ```
 call_9d5001a4996649f9b2da20855b39__thought__Co8CAb4+9vtqDGoRj3RPv/40SN2X...
 ```
