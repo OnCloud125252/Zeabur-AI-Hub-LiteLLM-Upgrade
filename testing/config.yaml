@@ -1,0 +1,19 @@
+model_list:
+  - model_name: gemini-2.5-flash
+    litellm_params:
+      model: gemini/gemini-2.5-flash
+      api_key: os.environ/VERTEX_API_KEY
+  - model_name: gemini-2.5-pro
+    litellm_params:
+      model: gemini/gemini-2.5-pro
+      api_key: os.environ/VERTEX_API_KEY
+  - model_name: gemini-3-pro
+    litellm_params:
+      model: gemini/gemini-3-pro-preview
+      api_key: os.environ/VERTEX_API_KEY
+
+general_settings:
+  master_key: sk-test-key-1234
+
+litellm_settings:
+  enable_preview_features: true
