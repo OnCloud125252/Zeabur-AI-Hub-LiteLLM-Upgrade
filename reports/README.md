@@ -28,6 +28,7 @@
 | [4e. 回滾計畫](4e-rollback-plan.md) | 緊急回滾程序 | 維運人員 |
 | [4f. 停機策略](4f-downtime-strategy.md) | 最小化停機時間的策略 | 技術主管 / 維運人員 |
 | [4g. 測試報告](4g-test-report.md) | 完整測試結果 | 技術主管 / QA |
+| [4h. Kubernetes 部署指南](4h-kubernetes-deployment.md) | K8s 部署與服務網格整合 | 維運人員 / SRE |
 
 ---
 
@@ -40,6 +41,7 @@
 1. **[4d-upgrade-steps.md](4d-upgrade-steps.md)** — 逐步升級程序
 2. **[4e-rollback-plan.md](4e-rollback-plan.md)** — 發生問題時的緊急回滾
 3. **[4b-db-migration-guide.md](4b-db-migration-guide.md)** — 資料庫遷移 SQL 指令碼
+4. **[4h-kubernetes-deployment.md](4h-kubernetes-deployment.md)** — Kubernetes 部署與服務網格整合
 
 ### 技術主管
 
@@ -104,7 +106,8 @@
     ├─ 4d-upgrade-steps.md
     ├─ 4e-rollback-plan.md
     ├─ 4f-downtime-strategy.md
-    └─ 4g-test-report.md
+    ├─ 4g-test-report.md
+    └─ 4h-kubernetes-deployment.md
 ```
 
 ---
