@@ -1,16 +1,32 @@
 # 升級步驟：Step-by-Step 操作手冊
 
 - **日期**：2026-02-27
+- **階段**：Phase 4 Delivery
 - **用途**：運維人員可直接依循的升級操作手冊
+- **升級路徑**：v1.79.0-stable → v1.81.12-stable.1
+- **狀態**：完成
 - **資料來源**：[reports/2-upgrade-plan.md](2-upgrade-plan.md)
 
 ---
 
-## 前置檢查清單
+## 執行摘要
+
+本文件提供完整的 LiteLLM 升級操作步驟，包含 Blue-Green 部署與停機升級兩種方案，以及詳細的前置檢查與驗證流程。
+
+| 指標 | 數值 |
+|------|------|
+| 預估停機時間（Blue-Green） | < 30 秒 |
+| 預估停機時間（停機升級） | 5-10 分鐘 |
+| 資料庫遷移階段 | Phase A + Phase B |
+| 回滾可行性 | 隨時可回滾 |
+
+---
+
+## 1. 前置檢查清單
 
 在開始升級前，請逐項確認：
 
-### 環境確認
+### 1.1 環境確認
 
 - [ ] Python 版本 >= 3.9（v1.81.12 要求）
 - [ ] Docker daemon 可連線至 `docker.litellm.ai`（新映像倉庫）
@@ -18,7 +34,7 @@
 - [ ] 記錄當前 Docker image tag：`ghcr.io/berriai/litellm:v1.79.0-stable`
 - [ ] 事先拉取新映像：`docker pull docker.litellm.ai/berriai/litellm:v1.81.12-stable.1`
 
-### 資料備份
+### 1.2 資料備份
 
 - [ ] **資料庫完整備份**（最關鍵步驟）
 
@@ -29,13 +45,13 @@
 - [ ] 記錄備份檔案位置及大小
 - [ ] 驗證備份可還原（在測試環境嘗試）
 
-### 設定快照
+### 1.3 設定快照
 
 - [ ] 備份 `config.yaml`
 - [ ] 備份 `.env`（環境變數）
 - [ ] 備份 `docker-compose.yml`
 
-### 健康基線
+### 1.4 健康基線
 
 - [ ] 記錄目前系統指標（延遲、錯誤率、記憶體使用量）
 - [ ] 執行 health check：`GET /health/liveliness` → `"I'm alive!"`
@@ -43,12 +59,12 @@
 
 ---
 
-## 方案 A：Blue-Green 部署（推薦）
+## 2. 方案 A：Blue-Green 部署（推薦）
 
 **預估停機時間**：< 30 秒
 **適用條件**：有 load balancer 或 Kubernetes 環境
 
-### Step 1：執行資料庫遷移
+### 2.1 Step 1：執行資料庫遷移
 
 > 所有 schema 變更都是可加性的（新表、新欄位帶預設值），可以**安全地在 v1.79.0 仍在運行時執行**。
 
@@ -75,7 +91,7 @@ psql -h <db-host> -U llmproxy -d litellm -c "SELECT COUNT(*) FROM information_sc
 
 > **替代方案**：如果選擇讓 v1.81.12 自動執行 `prisma db push`，可跳過此步驟。但建議設定 `DISABLE_SCHEMA_UPDATE=true` 搭配手動遷移。
 
-### Step 2：部署新版本實例
+### 2.2 Step 2：部署新版本實例
 
 ```yaml
 # docker-compose.new.yml
@@ -110,7 +126,7 @@ services:
 docker compose -f docker-compose.new.yml up -d
 ```
 
-### Step 3：驗證新實例
+### 2.3 Step 3：驗證新實例
 
 ```bash
 # 健康檢查
@@ -129,7 +145,7 @@ curl -X POST http://localhost:4001/v1/chat/completions \
 # 預期回傳: 正常的 chat completion 回應
 ```
 
-### Step 4：切換流量
+### 2.4 Step 4：切換流量
 
 ```bash
 # 在 load balancer 將流量從 :4000 切換至 :4001
@@ -139,7 +155,7 @@ curl -X POST http://localhost:4001/v1/chat/completions \
 # 監控錯誤率至少 5 分鐘
 ```
 
-### Step 5：停用舊實例
+### 2.5 Step 5：停用舊實例
 
 ```bash
 # 確認無問題後，停止舊版本
@@ -151,19 +167,19 @@ docker stop litellm-old
 
 ---
 
-## 方案 B：停機升級（簡易）
+## 3. 方案 B：停機升級（簡易）
 
 **預估停機時間**：5-10 分鐘
 **適用條件**：可接受短暫停機，環境較簡單
 
-### Step 1：停止 Proxy
+### 3.1 Step 1：停止 Proxy
 
 ```bash
 docker compose down
 # 預期: 所有服務停止（保留資料庫 volume）
 ```
 
-### Step 2：備份資料庫
+### 3.2 Step 2：備份資料庫
 
 ```bash
 # 確保 PostgreSQL 仍在運行（或單獨啟動）
@@ -174,7 +190,7 @@ pg_dump -Fc -h localhost -U llmproxy -d litellm -f litellm_backup_$(date +%Y%m%d
 # 預期: 產生 .dump 備份檔案
 ```
 
-### Step 3：更新設定
+### 3.3 Step 3：更新設定
 
 修改 `docker-compose.yml`：
 
@@ -195,9 +211,9 @@ services:
       start_period: 40s
 ```
 
-### Step 4：啟動新版本
+### 3.4 Step 4：啟動新版本
 
-**選項 A：自動遷移（較簡易）**
+#### 選項 A：自動遷移（較簡易）
 
 ```bash
 docker compose up -d
@@ -205,7 +221,7 @@ docker compose up -d
 # 等待 health check 通過（約 40 秒 start_period）
 ```
 
-**選項 B：手動遷移（較安全，推薦）**
+#### 選項 B：手動遷移（較安全，推薦）
 
 ```bash
 # 先確保 DB 啟動
@@ -221,7 +237,7 @@ psql -h localhost -U llmproxy -d litellm -f migration_phase_b.sql
 DISABLE_SCHEMA_UPDATE=true docker compose up -d
 ```
 
-### Step 5：驗證
+### 3.5 Step 5：驗證
 
 ```bash
 # 等待 health check 通過（start_period: 40s）
@@ -236,9 +252,9 @@ curl -H "Authorization: Bearer sk-your-master-key" http://localhost:4000/v1/mode
 
 ---
 
-## 升級後驗證清單
+## 4. 升級後驗證清單
 
-### 自動化測試
+### 4.1 自動化測試
 
 ```bash
 # 執行 28 項迴歸測試
@@ -248,7 +264,7 @@ python testing/local/test_regression.py --host <proxy-host> --port 4000
 python testing/local/test_gemini_signature.py --host <proxy-host> --port 4000
 ```
 
-### 手動驗證
+### 4.2 手動驗證
 
 - [ ] `GET /health/liveliness` → `"I'm alive!"`
 - [ ] `GET /health/readiness` → 200
@@ -259,7 +275,7 @@ python testing/local/test_gemini_signature.py --host <proxy-host> --port 4000
 - [ ] 多輪工具呼叫 → 完整對話流程正常
 - [ ] 無效模型/金鑰 → 正確錯誤回應
 
-### thought_signature 專項驗證
+### 4.3 thought_signature 專項驗證
 
 ```bash
 curl -X POST http://<proxy-host>:4000/v1/chat/completions \

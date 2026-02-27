@@ -1,18 +1,23 @@
 # 環境準備與舊版本運行驗證
 
-- **Date**: 2026-02-26
-- **Purpose**: 記錄 LiteLLM v1.79.0-stable 的完整基準線——設定、功能清單、迴歸測試結果——作為升級驗證的參考基準。
+- **日期**：2026-02-26
+- **階段**：Phase 1 - Environment Preparation
+- **用途**：記錄 LiteLLM v1.79.0-stable 的完整基準線——設定、功能清單、迴歸測試結果——作為升級驗證的參考基準
+- **升級路徑**：v1.79.0-stable → v1.81.12-stable.1
+- **狀態**：完成
 
-## Summary
+---
+
+## 執行摘要
 
 第一階段的四項任務全部完成：
 
-| # | 任務 | 狀態 | 成果物 |
-|---|------|------|--------|
-| 1 | 本機安裝並運行 v1.79.0 | 完成 | venv 環境 + proxy 成功啟動 |
-| 2 | 記錄完整設定 | 完成 | config.yaml、環境變數、DB schema（28 張表） |
-| 3 | 盤點功能清單 | 完成 | 200+ API 端點、4 種認證方式、11 項核心能力 |
-| 4 | 建立迴歸測試基準線 | 完成 | 28 項測試全數通過（v1.79.0 與 v1.80.11 皆通過） |
+| 指標 | 數值 |
+|------|------|
+| 本機安裝並運行 v1.79.0 | 完成 — venv 環境 + proxy 成功啟動 |
+| 完整設定記錄 | 完成 — config.yaml、環境變數、DB schema（28 張表） |
+| 功能清單盤點 | 完成 — 200+ API 端點、4 種認證方式、11 項核心能力 |
+| 迴歸測試基準線 | 完成 — 28 項測試全數通過（v1.79.0 與 v1.80.11 皆通過） |
 
 額外完成了 thought_signature 修復驗證（對應第三階段第 4 項），確認 v1.80.11 包含完整修復。
 
@@ -20,7 +25,7 @@
 
 ## 1. 本機環境安裝與運行驗證
 
-### 安裝資訊
+### 1.1 安裝資訊
 
 | 項目 | 值 |
 |------|---|
@@ -32,7 +37,7 @@
 | 啟動指令 | `litellm --config config.yaml --port 4000` |
 | 運行狀態 | Proxy 成功啟動並處理 API 請求 |
 
-### 驗證方式
+### 1.2 驗證方式
 
 1. 使用 `uv` 在 `testing/local/litellm-v1.79.0/` 建立獨立 Python 虛擬環境
 2. 安裝 LiteLLM 及其 proxy 相依套件
@@ -135,7 +140,7 @@ Schema 位於：`litellm/proxy/schema.prisma`
 
 **共計 28 張表，可分為六大類：**
 
-#### 核心管理（7 張表）
+#### 2.4.1 核心管理（7 張表）
 
 | 資料表 | 用途 |
 |--------|------|
@@ -147,7 +152,7 @@ Schema 位於：`litellm/proxy/schema.prisma`
 | `LiteLLM_PromptTable` | Prompt 模板 |
 | `LiteLLM_SearchToolsTable` | 搜尋工具設定 |
 
-#### 組織與團隊（6 張表）
+#### 2.4.2 組織與團隊（6 張表）
 
 | 資料表 | 用途 |
 |--------|------|
@@ -158,7 +163,7 @@ Schema 位於：`litellm/proxy/schema.prisma`
 | `LiteLLM_OrganizationMembership` | 使用者與組織的成員關係 |
 | `LiteLLM_InvitationLink` | 邀請連結管理 |
 
-#### 預算與花費（5 張表）
+#### 2.4.3 預算與花費（5 張表）
 
 | 資料表 | 用途 |
 |--------|------|
@@ -168,7 +173,7 @@ Schema 位於：`litellm/proxy/schema.prisma`
 | `LiteLLM_DailyUserSpend` | 每日使用者花費彙總 |
 | `LiteLLM_DailyTeamSpend` | 每日團隊花費彙總 |
 
-#### 日誌與追蹤（4 張表）
+#### 2.4.4 日誌與追蹤（4 張表）
 
 | 資料表 | 用途 |
 |--------|------|
@@ -177,7 +182,7 @@ Schema 位於：`litellm/proxy/schema.prisma`
 | `LiteLLM_AuditLog` | 管理操作審計日誌 |
 | `LiteLLM_DailyTagSpend` | 每日標籤花費彙總 |
 
-#### 進階功能（4 張表）
+#### 2.4.5 進階功能（4 張表）
 
 | 資料表 | 用途 |
 |--------|------|
@@ -186,7 +191,7 @@ Schema 位於：`litellm/proxy/schema.prisma`
 | `LiteLLM_ManagedFileTable` | 統一檔案管理 |
 | `LiteLLM_ManagedObjectTable` | Batch／Fine-tune 物件 |
 
-#### 其他（2 張表）
+#### 2.4.6 其他（2 張表）
 
 | 資料表 | 用途 |
 |--------|------|
@@ -211,7 +216,7 @@ Schema 位於：`litellm/proxy/schema.prisma`
 
 ### 3.2 API 端點分類（200+ 端點）
 
-#### OpenAI 相容端點（核心業務）
+#### 3.2.1 OpenAI 相容端點（核心業務）
 
 | 類別 | 數量 | 關鍵端點 | 說明 |
 |------|------|----------|------|
@@ -228,14 +233,14 @@ Schema 位於：`litellm/proxy/schema.prisma`
 | Responses | 10 | `/v1/responses` | Responses API |
 | Assistants/Threads | 10+ | `/v1/assistants`, `/v1/threads` | 助手與對話執行緒 |
 
-#### 供應商特定端點
+#### 3.2.2 供應商特定端點
 
 | 類別 | 數量 | 關鍵端點 | 說明 |
 |------|------|----------|------|
 | Anthropic | 2 | `/v1/messages` | Claude 原生 API 格式 |
 | Google Native | 6 | `/v1beta/models/{name}:generateContent` | Gemini 原生 API 格式 |
 
-#### 進階功能端點
+#### 3.2.3 進階功能端點
 
 | 類別 | 數量 | 關鍵端點 | 說明 |
 |------|------|----------|------|
@@ -245,7 +250,7 @@ Schema 位於：`litellm/proxy/schema.prisma`
 | Vector Stores | 4 | `/v1/vector_stores` | 向量儲存管理 |
 | Video | 8 | `/v1/videos` | 影片處理 |
 
-#### 管理端點
+#### 3.2.4 管理端點
 
 | 類別 | 數量 | 關鍵端點 | 說明 |
 |------|------|----------|------|
@@ -262,7 +267,7 @@ Schema 位於：`litellm/proxy/schema.prisma`
 | MCP | 5 | `/tools`, `/server` | MCP 伺服器管理 |
 | Callbacks | 3+ | `/team/{id}/callback` | 團隊回呼設定 |
 
-#### 監控與分析端點
+#### 3.2.5 監控與分析端點
 
 | 類別 | 數量 | 關鍵端點 | 說明 |
 |------|------|----------|------|
@@ -393,7 +398,7 @@ Gemini thinking mode 下，LiteLLM v1.79.0 在將 Gemini API 回應轉換為 Ope
 
 ### 5.3 驗證結果
 
-#### 程式碼存在性檢查
+#### 5.3.1 程式碼存在性檢查
 
 | 檢查項目 | v1.79.0 | v1.80.11 |
 |----------|---------|----------|
@@ -402,7 +407,7 @@ Gemini thinking mode 下，LiteLLM v1.79.0 在將 Gemini API 回應轉換為 Ope
 | 測試檔案 | 不存在 | 11 個測試案例 |
 | `THOUGHT_SIGNATURE_SEPARATOR` 可匯入 | ImportError | OK |
 
-#### 單元測試（v1.80.11）
+#### 5.3.2 單元測試（v1.80.11）
 
 11/11 全數通過（0.46 秒）：
 
@@ -413,14 +418,14 @@ Gemini thinking mode 下，LiteLLM v1.79.0 在將 Gemini API 回應轉換為 Ope
 - OpenAI 客戶端端對端流程
 - 平行工具呼叫
 
-#### 即時 API 整合測試
+#### 5.3.3 即時 API 整合測試
 
 | 測試 | 模型 | v1.79.0 | v1.80.11 |
 |------|------|---------|----------|
 | 基本工具呼叫往返 | gemini-2.5-flash | 通過（無簽章） | 通過（含簽章） |
 | 多城市擴展測試 | gemini-2.5-flash | 通過（無簽章） | 通過（含簽章） |
 | 基本工具呼叫往返 | gemini-3-pro-preview | 通過（無簽章） | 通過（含簽章） |
-| 多城市擴展測試 | gemini-3-pro-preview | 通過（無簽章） | 通過（含簽章） |
+| 多輪擴展測試 | gemini-3-pro-preview | 通過（無簽章） | 通過（含簽章） |
 | ID 中含 `__thought__` | 所有模型 | **否** | **是** |
 
 ### 5.4 結論
@@ -448,10 +453,10 @@ v1.80.11-stable 包含完整且功能正常的 thought_signature 實作。升級
 
 ## References
 
-- LiteLLM v1.79.0-stable：<https://github.com/BerriAI/litellm/releases/tag/v1.79.0-stable>
-- LiteLLM v1.80.11-stable：<https://github.com/BerriAI/litellm/releases/tag/v1.80.11-stable>
-- PR #16895（thought_signature 初始實作）：<https://github.com/BerriAI/litellm/pull/16895>
-- PR #18374（thought_signature 正式化）：<https://github.com/BerriAI/litellm/pull/18374>
-- Gemini Thought Signatures 文件：<https://ai.google.dev/gemini-api/docs/thought-signatures>
+- LiteLLM v1.79.0-stable：[https://github.com/BerriAI/litellm/releases/tag/v1.79.0-stable](https://github.com/BerriAI/litellm/releases/tag/v1.79.0-stable)
+- LiteLLM v1.80.11-stable：[https://github.com/BerriAI/litellm/releases/tag/v1.80.11-stable](https://github.com/BerriAI/litellm/releases/tag/v1.80.11-stable)
+- PR #16895（thought_signature 初始實作）：[https://github.com/BerriAI/litellm/pull/16895](https://github.com/BerriAI/litellm/pull/16895)
+- PR #18374（thought_signature 正式化）：[https://github.com/BerriAI/litellm/pull/18374](https://github.com/BerriAI/litellm/pull/18374)
+- Gemini Thought Signatures 文件：[https://ai.google.dev/gemini-api/docs/thought-signatures](https://ai.google.dev/gemini-api/docs/thought-signatures)
 - Schema 檔案：`testing/local/litellm-v1.79.0/litellm/proxy/schema.prisma`
 - Docker Compose：`testing/local/litellm-v1.79.0/docker-compose.yml`

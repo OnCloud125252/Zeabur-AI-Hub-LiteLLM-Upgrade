@@ -16,7 +16,7 @@ LiteLLM 從 v1.79.0-stable 升級到 v1.81.12-stable.1 已成功在遠端 Docker
 
 ---
 
-## 驗證計劃概述
+## 1. 驗證計劃概述
 
 | 任務 | 預估時間 | 相依項目 | 實際結果 |
 |------|----------|----------|----------|
@@ -33,7 +33,7 @@ LiteLLM 從 v1.79.0-stable 升級到 v1.81.12-stable.1 已成功在遠端 Docker
 
 ---
 
-## 環境詳情
+## 2. 環境詳情
 
 | 項目 | 規格 |
 |------|------|
@@ -51,7 +51,7 @@ LiteLLM 從 v1.79.0-stable 升級到 v1.81.12-stable.1 已成功在遠端 Docker
 
 ---
 
-## 部署配置
+## 3. 部署配置
 
 ### 目錄結構
 
@@ -205,16 +205,16 @@ litellm_settings:
 
 ---
 
-## 資料庫遷移
+## 4. 資料庫遷移
 
 ### 遷移策略
 
-**選項 A：自動遷移（簡易）**
+#### 選項 A：自動遷移（簡易）
 
 - 讓 v1.81.12 自動執行 `prisma db push`
 - 適合：快速驗證、非生產環境
 
-**選項 B：手動遷移（推薦）**
+#### 選項 B：手動遷移（推薦）
 
 - 執行 SQL 遷移腳本，保留完整控制
 - 適合：生產環境模擬、需要審核每個變更
@@ -259,7 +259,7 @@ ssh root@10.0.1.9 "docker exec litellm-upgrade-test-db-1 psql -U llmproxy -d lit
 
 ---
 
-## 測試結果
+## 5. 測試結果
 
 ### 測試執行步驟
 
@@ -321,7 +321,7 @@ python testing/local/test_performance.py --host 10.0.1.9 --port 4000 --output re
 
 ---
 
-## thought_signature 專項驗證
+## 6. thought_signature 專項驗證
 
 ### 測試情境
 
@@ -369,7 +369,7 @@ call_9d5001a4996649f9b2da20855b39__thought__Co8CAb4+9vtqDGoRj3RPv/40SN2X...
 
 ---
 
-## 效能比對測試
+## 7. 效能比對測試
 
 測試模型：gemini-2.5-flash，每項基準測試 10 輪。
 
@@ -400,7 +400,7 @@ call_9d5001a4996649f9b2da20855b39__thought__Co8CAb4+9vtqDGoRj3RPv/40SN2X...
 
 ---
 
-## 回滾測試
+## 8. 回滾測試
 
 ### 回滾步驟
 
@@ -427,7 +427,7 @@ python testing/local/test_regression.py --host 10.0.1.9 --port 4000
 
 ---
 
-## 風險與因應
+## 9. 風險與因應
 
 | 風險 | 機率 | 影響 | 因應措施 |
 |------|------|------|----------|
@@ -438,7 +438,7 @@ python testing/local/test_regression.py --host 10.0.1.9 --port 4000
 
 ---
 
-## 交付項目清單
+## 10. 交付項目清單
 
 - [x] 遠端伺服器上建構 Docker 環境
 - [x] v1.79.0 基準線測試通過（28/28）
@@ -453,7 +453,7 @@ python testing/local/test_regression.py --host 10.0.1.9 --port 4000
 
 ---
 
-## 報告檔案
+## 11. 報告檔案
 
 | 檔案 | 說明 |
 |------|-------------|
@@ -467,7 +467,7 @@ python testing/local/test_regression.py --host 10.0.1.9 --port 4000
 
 ---
 
-## 時間表
+## 12. 時間表
 
 | 時間 | 活動 | 耗時 |
 |------|----------|----------|

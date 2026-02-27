@@ -1,8 +1,22 @@
 # 回滾方案
 
 - **日期**：2026-02-27
+- **階段**：Phase 4 Delivery
 - **用途**：緊急回滾操作手冊
-- **資料來源**：[reports/2-upgrade-plan.md](2-upgrade-plan.md)、[reports/3-verification-report.md](3-verification-report.md)
+- **升級路徑**：v1.79.0-stable → v1.81.12-stable.1
+- **狀態**：完成
+
+---
+
+## 執行摘要
+
+本文件提供 LiteLLM 升級失敗時的緊急回滾操作手冊，包含快速回滾（Blue-Green）和完整回滾（停機升級）兩種方案，以及資料庫回滾注意事項。
+
+| 指標 | 數值 |
+|------|------|
+| 快速回滾停機時間 | < 30 秒 |
+| 完整回滾停機時間 | 5-10 分鐘 |
+| 資料庫回滾需求 | 多數情況不需要 |
 
 ---
 
@@ -25,7 +39,7 @@
 **適用情境**：使用方案 A（Blue-Green）升級，舊實例仍在運行
 **停機時間**：< 30 秒
 
-### 操作步驟
+### 2.1 操作步驟
 
 ```bash
 # Step 1: 切換 load balancer 流量回舊實例
@@ -51,7 +65,7 @@ python testing/local/test_regression.py --host <proxy-host> --port 4000
 **適用情境**：使用方案 B（停機升級），舊實例已停止
 **停機時間**：5-10 分鐘
 
-### 操作步驟
+### 3.1 操作步驟
 
 ```bash
 # Step 1: 停止新版本
@@ -150,6 +164,6 @@ docker compose up -d
 
 ## References
 
-- 升級計劃回滾章節：[reports/2-upgrade-plan.md](2-upgrade-plan.md) 第 4-5 章
-- Phase 3 回滾測試結果：[reports/3-verification-report.md](3-verification-report.md)
-- 升級步驟：[reports/4d-upgrade-steps.md](4d-upgrade-steps.md)
+- 升級計劃回滾章節：[2-upgrade-plan.md](2-upgrade-plan.md)
+- Phase 3 回滾測試結果：[3-verification-report.md](3-verification-report.md)
+- 升級步驟：[4d-upgrade-steps.md](4d-upgrade-steps.md)

@@ -1,22 +1,23 @@
 # 升級計劃：LiteLLM v1.79.0-stable → v1.81.12-stable.1
 
-- **Date**: 2026-02-27
-- **Target Version**: v1.81.12-stable.1
-- **Status**: Complete
+- **日期**：2026-02-27
+- **階段**：Phase 2 - Upgrade Planning
+- **用途**：詳細說明 LiteLLM 升級的完整流程、風險評估與驗證計劃
+- **升級路徑**：v1.79.0-stable → v1.81.12-stable.1
+- **狀態**：完成
 
-## Overview
+---
+
+## 執行摘要
 
 本升級計劃詳細說明從 LiteLLM v1.79.0-stable 升級至 v1.81.12-stable.1 的完整流程。升級的主要驅動因素是修復 Gemini `thought_signature` 503 錯誤（PR #16895 + #18374），同時獲得 4 個月的效能改善、安全修補及新功能。
 
-### 升級策略
-
-**直接跳躍**：v1.79.0 → v1.81.12-stable.1（跳過中間版本）
-
-理由：
-
-- Prisma schema 變更是累積性的，中間版本不需逐步遷移
-- 所有 schema 變更都是可加性的（新表 + 新欄位 + 預設值）
-- v1.81.12-stable.1 已包含所有 v1.80.x / v1.81.x 的修復
+| 指標 | 數值 |
+|------|------|
+| 目標版本 | v1.81.12-stable.1 |
+| 升級策略 | 直接跳躍（跳過中間版本）|
+| 預估停機時間（Blue-Green）| < 30 秒 |
+| 預估停機時間（停機升級）| 5-10 分鐘 |
 
 ---
 
@@ -58,12 +59,12 @@
 
 ## 2. 升級步驟
 
-### 方案 A：Blue-Green 部署（推薦）
+### 2.1 方案 A：Blue-Green 部署（推薦）
 
 **預估停機時間**：< 30 秒
 **適用條件**：有 load balancer 或 Kubernetes 環境
 
-#### Step 1：執行資料庫遷移（可在舊版本運行中執行）
+#### 2.1.1 Step 1：執行資料庫遷移（可在舊版本運行中執行）
 
 所有 schema 變更都是可加性的（新表、新欄位帶預設值），因此可以**安全地在 v1.79.0 仍在運行時執行**。
 
@@ -82,7 +83,7 @@ SQL 腳本詳見 `docs/db-schema-migration-v1.79-to-v1.81.md`。
 
 > **重要**：如果選擇讓 v1.81.12 自動執行 `prisma db push`（而非手動 SQL），可跳過此步驟。但建議設定 `DISABLE_SCHEMA_UPDATE=true` 搭配手動遷移，以獲得更好的控制。
 
-#### Step 2：部署新版本實例
+#### 2.1.2 Step 2：部署新版本實例
 
 ```yaml
 # docker-compose.yml (v1.81.12)
@@ -106,7 +107,7 @@ services:
       start_period: 40s
 ```
 
-#### Step 3：驗證新實例
+#### 2.1.3 Step 3：驗證新實例
 
 ```bash
 # 健康檢查
@@ -124,7 +125,7 @@ curl -X POST http://localhost:4001/v1/chat/completions \
   -d '{"model": "gemini-2.5-flash", "messages": [{"role": "user", "content": "Say hello"}]}'
 ```
 
-#### Step 4：切換流量
+#### 2.1.4 Step 4：切換流量
 
 ```bash
 # 在 load balancer 將流量從 :4000 切換至 :4001
@@ -134,7 +135,7 @@ curl -X POST http://localhost:4001/v1/chat/completions \
 # 監控錯誤率至少 5 分鐘
 ```
 
-#### Step 5：停用舊實例
+#### 2.1.5 Step 5：停用舊實例
 
 ```bash
 # 確認無問題後，停止舊版本
@@ -143,24 +144,24 @@ docker stop litellm-old
 
 ---
 
-### 方案 B：停機升級（簡易）
+### 2.2 方案 B：停機升級（簡易）
 
 **預估停機時間**：5-10 分鐘
 **適用條件**：可接受短暫停機
 
-#### Step 1：停止 Proxy
+#### 2.2.1 Step 1：停止 Proxy
 
 ```bash
 docker-compose down
 ```
 
-#### Step 2：備份資料庫
+#### 2.2.2 Step 2：備份資料庫
 
 ```bash
 pg_dump -Fc -d litellm -f litellm_backup_$(date +%Y%m%d_%H%M%S).dump
 ```
 
-#### Step 3：更新設定
+#### 2.2.3 Step 3：更新設定
 
 ```yaml
 # docker-compose.yml 修改
@@ -179,7 +180,7 @@ services:
       start_period: 40s
 ```
 
-#### Step 4：啟動新版本
+#### 2.2.4 Step 4：啟動新版本
 
 ```bash
 # 選項 A：讓 LiteLLM 自動遷移 schema（較簡易但控制較少）
@@ -193,7 +194,7 @@ psql -h <db-host> -U llmproxy -d litellm -f migration_phase_b.sql
 DISABLE_SCHEMA_UPDATE=true docker-compose up -d
 ```
 
-#### Step 5：驗證
+#### 2.2.5 Step 5：驗證
 
 ```bash
 # 等待 health check 通過（start_period: 40s）
@@ -241,14 +242,14 @@ curl -H "Authorization: Bearer sk-test-key-1234" http://localhost:4000/v1/models
 
 ### 4.2 回滾步驟
 
-#### 快速回滾（方案 A：Blue-Green 部署）
+#### 4.2.1 快速回滾（方案 A：Blue-Green 部署）
 
 ```bash
 # 只需切換 load balancer 回舊實例
 # 停機時間: < 30 秒
 ```
 
-#### 完整回滾（方案 B：停機升級）
+#### 4.2.2 完整回滾（方案 B：停機升級）
 
 ```bash
 # Step 1: 停止新版本
@@ -366,9 +367,10 @@ curl -X POST http://localhost:4000/v1/chat/completions \
 
 ## References
 
-- 版本差異分析：`reports/upgrade-changelog-v1.79-to-v1.81.md`
-- DB Schema 遷移分析：`docs/db-schema-migration-v1.79-to-v1.81.md`
-- Phase 1 報告：`reports/phase1-report.md`
-- 迴歸測試：`testing/local/test_regression.py`
-- thought_signature 測試：`testing/local/test_gemini_thought_signature.py`
+- 版本差異分析：[docs/research/upgrade-changelog-v1.79-to-v1.81.md](../docs/research/upgrade-changelog-v1.79-to-v1.81.md)
+- DB Schema 遷移分析：[docs/research/db-schema-migration-v1.79-to-v1.81.md](../docs/research/db-schema-migration-v1.79-to-v1.81.md)
+- Phase 1 報告：[1-environment-report.md](1-environment-report.md)
+- Phase 3 驗證報告：[3-verification-report.md](3-verification-report.md)
+- 迴歸測試：[../testing/local/test_regression.py](../testing/local/test_regression.py)
+- thought_signature 測試：[../testing/local/test_gemini_signature.py](../testing/local/test_gemini_signature.py)
 - LiteLLM Releases：<https://github.com/BerriAI/litellm/releases>

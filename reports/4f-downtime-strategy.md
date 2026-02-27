@@ -1,8 +1,22 @@
 # 停機策略與 Downtime 預估
 
 - **日期**：2026-02-27
+- **階段**：Phase 4 Delivery
 - **用途**：停機時間預估與最佳化策略
-- **資料來源**：[reports/2-upgrade-plan.md](2-upgrade-plan.md)、[reports/3-verification-report.md](3-verification-report.md)
+- **升級路徑**：v1.79.0-stable → v1.81.12-stable.1
+- **狀態**：完成
+
+---
+
+## 執行摘要
+
+本文件比較 Blue-Green 部署與停機升級兩種方案的停機時間，提供時序圖與減少 downtime 的策略，並包含 Phase 3 實際驗證數據。
+
+| 指標 | 數值 |
+|------|------|
+| Blue-Green 停機時間 | < 30 秒 |
+| 停機升級停機時間 | 5-10 分鐘 |
+| Phase 3 實際總耗時 | 約 23 分鐘 |
 
 ---
 
@@ -86,7 +100,7 @@ t+3.5  [恢復] 確認服務正常 ◄── 停機結束
 
 ## 4. 減少 Downtime 的 5 項策略
 
-### 策略 1：提前拉取映像
+### 4.1 策略 1：提前拉取映像
 
 ```bash
 # 提前數小時或前一天執行
@@ -95,7 +109,7 @@ docker pull docker.litellm.ai/berriai/litellm:v1.81.12-stable.1
 
 映像拉取可能需要 1-5 分鐘（視網路），提前完成可避免佔用升級窗口。
 
-### 策略 2：提前執行 DB 遷移
+### 4.2 策略 2：提前執行 DB 遷移
 
 由於所有 schema 變更都是可加性的：
 
@@ -105,11 +119,11 @@ docker pull docker.litellm.ai/berriai/litellm:v1.81.12-stable.1
 
 可以在 v1.79.0 **仍在運行時**安全執行遷移。v1.79.0 會忽略不認識的表和欄位。
 
-### 策略 3：使用 Blue-Green 部署
+### 4.3 策略 3：使用 Blue-Green 部署
 
 同時運行新舊版本，僅在 LB 切換時產生極短停機（< 30 秒）。這是最推薦的方式。
 
-### 策略 4：選擇低流量時段
+### 4.4 策略 4：選擇低流量時段
 
 建議在以下時段執行升級：
 
@@ -117,7 +131,7 @@ docker pull docker.litellm.ai/berriai/litellm:v1.81.12-stable.1
 - 週末（如業務允許）
 - 維護窗口（如有既定排程）
 
-### 策略 5：準備自動回滾腳本
+### 4.5 策略 5：準備自動回滾腳本
 
 ```bash
 #!/bin/bash
@@ -193,7 +207,7 @@ Zeabur 平台基於 Docker 容器部署，以下建議針對此環境：
 
 ## References
 
-- 升級計劃：[reports/2-upgrade-plan.md](2-upgrade-plan.md)
-- Phase 3 時間表：[reports/3-verification-report.md](3-verification-report.md)
-- 升級步驟：[reports/4d-upgrade-steps.md](4d-upgrade-steps.md)
-- 回滾方案：[reports/4e-rollback-plan.md](4e-rollback-plan.md)
+- 升級計劃：[2-upgrade-plan.md](2-upgrade-plan.md)
+- Phase 3 時間表：[3-verification-report.md](3-verification-report.md)
+- 升級步驟：[4d-upgrade-steps.md](4d-upgrade-steps.md)
+- 回滾方案：[4e-rollback-plan.md](4e-rollback-plan.md)

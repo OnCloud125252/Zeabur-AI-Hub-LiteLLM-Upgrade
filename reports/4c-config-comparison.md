@@ -1,8 +1,17 @@
 # 設定變更對照表：v1.79.0 → v1.81.12
 
 - **日期**：2026-02-27
+- **階段**：Phase 4 Delivery
 - **用途**：運維人員升級前後的設定檢查清單
+- **升級路徑**：v1.79.0-stable → v1.81.12-stable.1
+- **狀態**：完成
 - **資料來源**：[reports/2-upgrade-plan.md](2-upgrade-plan.md)、[docs/research/upgrade-changelog-v1.79-to-v1.81.md](../docs/research/upgrade-changelog-v1.79-to-v1.81.md)
+
+---
+
+## 執行摘要
+
+本文件提供 v1.79.0 至 v1.81.12 版本間的設定變更對照，包含必須變更、建議變更、無需變更及新增設定項，協助運維人員在升級前進行必要的設定調整。
 
 ---
 
@@ -15,7 +24,7 @@
 | 1 | Docker image | `ghcr.io/berriai/litellm:v1.79.0-stable` | `docker.litellm.ai/berriai/litellm:v1.81.12-stable.1` | 映像倉庫遷移 |
 | 2 | Health check | `wget --no-verbose --tries=1 ...` | `python3 -c "import urllib.request; ..."` | 新映像不含 wget |
 
-### Docker Compose Health Check 對照
+### 1.1 Docker Compose Health Check 對照
 
 **v1.79.0（舊）：**
 
@@ -55,7 +64,7 @@ healthcheck:
 | 2 | `MAX_SIZE_IN_MEMORY_QUEUE` | 10000 | **2000** | 高負載環境視需要調高 |
 | 3 | `LITELLM_ASYNCIO_QUEUE_MAXSIZE` | 無上限 | **1000** | 監控佇列使用率 |
 
-### 如何調整
+### 2.1 如何調整
 
 在 `docker-compose.yml` 的 `environment` 區塊新增：
 
@@ -206,7 +215,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
 ```
 
-### 變更摘要
+### 5.1 變更摘要
 
 | 行 | 變更類型 | 項目 |
 |----|----------|------|

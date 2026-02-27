@@ -1,7 +1,10 @@
 # 資料庫遷移指南：v1.79.0 → v1.81.12
 
 - **日期**：2026-02-27
+- **階段**：Phase 4 Delivery
 - **用途**：DBA / 運維人員可直接操作的資料庫遷移指南
+- **升級路徑**：v1.79.0-stable → v1.81.12-stable.1
+- **狀態**：完成
 - **資料來源**：[docs/research/db-schema-migration-v1.79-to-v1.81.md](../docs/research/db-schema-migration-v1.79-to-v1.81.md)、[testing/remote/migrations/](../testing/remote/migrations/)
 
 ---
@@ -33,7 +36,7 @@
 | **手動 SQL 遷移**（推薦） | 生產環境 | 完全可控、可審計、可在舊版運行中執行 | 需手動操作 |
 | **Prisma 自動遷移** | 測試環境、快速驗證 | 零操作 | `--accept-data-loss` 有風險 |
 
-### 生產環境建議
+### 1.1 生產環境建議
 
 1. 使用手動 SQL 腳本執行遷移
 2. 設定 `DISABLE_SCHEMA_UPDATE=true` 防止 LiteLLM 啟動時自動執行 `prisma db push`
@@ -43,7 +46,7 @@
 
 ## 2. Phase A 遷移：v1.79.0 → v1.80.11
 
-### 新增資料表（9 張）
+### 2.1 新增資料表（9 張）
 
 | # | 資料表 | 用途 | 安全性 |
 |---|--------|------|--------|
@@ -57,7 +60,7 @@
 | 8 | `LiteLLM_UISettings` | UI 設定儲存 | 可加性 |
 | 9 | `LiteLLM_SkillsTable` | Skills 管理 | 可加性 |
 
-### 修改資料表（6 張）
+### 2.2 修改資料表（6 張）
 
 | 資料表 | 變更 | 安全性 |
 |--------|------|--------|
@@ -68,7 +71,7 @@
 | `LiteLLM_DailyTagSpend` | 新增 `request_id` 欄位 | 可加性 |
 | `LiteLLM_PromptTable` | unique constraint 變更 | **破壞性** |
 
-### PromptTable 破壞性變更
+### 2.3 PromptTable 破壞性變更
 
 ```
 v1.79.0: prompt_id String @unique
@@ -80,7 +83,7 @@ v1.80.11: prompt_id String (不再 @unique)
 
 原本的單欄 unique 約束被移除，改為 `(prompt_id, version)` 複合唯一約束，支援 prompt 版本控制。
 
-### 執行指令
+### 2.4 執行指令
 
 ```bash
 # 連接至 PostgreSQL
@@ -96,7 +99,7 @@ SQL 腳本位於：`testing/remote/migrations/migration_phase_a.sql`
 
 ## 3. Phase B 遷移：v1.80.11 → v1.81.12
 
-### 新增資料表（6 張）
+### 3.1 新增資料表（6 張）
 
 | # | 資料表 | 用途 | 安全性 |
 |---|--------|------|--------|
@@ -107,7 +110,7 @@ SQL 腳本位於：`testing/remote/migrations/migration_phase_a.sql`
 | 5 | `LiteLLM_PolicyAttachmentTable` | 政策附加（關聯 team/key/model） | 可加性 |
 | 6 | `LiteLLM_AccessGroupTable` | 存取群組管理 | 可加性 |
 
-### 修改資料表（6+ 張）
+### 3.2 修改資料表（6+ 張）
 
 | 資料表 | 變更 | 安全性 |
 |--------|------|--------|
@@ -118,7 +121,7 @@ SQL 腳本位於：`testing/remote/migrations/migration_phase_a.sql`
 | `LiteLLM_GuardrailsTable` | 新增 `team_id` | 可加性 |
 | **6 張 Daily Spend 表** | 新增 `endpoint` 欄位 + unique constraint 變更 | **破壞性** |
 
-### Daily Spend 表 unique constraint 變更
+### 3.3 Daily Spend 表 unique constraint 變更
 
 所有 6 張 Daily Spend 表（User、Organization、EndUser、Agent、Team、Tag）的 unique constraint 都新增了 `endpoint` 欄位：
 
@@ -129,7 +132,7 @@ v1.81.12: @@unique([user_id, date, api_key, model, custom_llm_provider, mcp_name
 
 **風險評估**：新增的 `endpoint` 欄位為 nullable，現有資料的 `endpoint` 值為 `NULL`。PostgreSQL 中 `NULL` 在 unique constraint 中被視為不同值，因此不會產生資料衝突。但必須先丟棄舊的 unique constraint 再建立新的。
 
-### 執行指令
+### 3.4 執行指令
 
 ```bash
 # 連接至 PostgreSQL
