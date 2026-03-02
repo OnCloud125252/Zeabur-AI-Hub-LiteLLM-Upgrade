@@ -125,7 +125,17 @@
     ├─ 4f-downtime-strategy.md
     ├─ 4g-test-report.md
     └─ 4h-kubernetes-deployment.md
+
+security-audit-report.md (補充報告)
 ```
+
+---
+
+## 補充報告
+
+| 報告 | 類型 | 說明 |
+|------|------|------|
+| [安全稽核報告](security-audit-report.md) | Security | Gitleaks 機密掃描結果 - 無洩漏 |
 
 ---
 
